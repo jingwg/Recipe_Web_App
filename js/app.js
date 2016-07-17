@@ -39,10 +39,14 @@ var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstra
 
 
 myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) {
+
+	function searchItem (searchTerm) {
 	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' + searchTerm).then(function (response) {
 		var data = response.data;
 		//do something with the data from the response...
 		//like put it on the $scope to show it in the view!
 		$scope.items = data;
+		console.log($scope.items);
 	});
+	};
 }]);
