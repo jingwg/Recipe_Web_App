@@ -13,7 +13,7 @@ var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstra
 				})
 				//The abstract parent page
 				.state('category', {
-					url:'/vategory',
+					url:'/category',
 					templateUrl: 'partials/category.html' 
 				})
 				 //The order list page 
@@ -22,9 +22,10 @@ var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstra
    					 templateUrl: 'partials/detail.html' 
 				 })
 				 //The shopping cart page
-        		.state('list', {
-					url:'/list',
-					templateUrl: 'partials/list.html' //path of the partial to load
+        		.state('lists', {
+					url:'/lists',
+					templateUrl: 'partials/lists.html', //path of the partial to load
+					controller:"ListCtrl"
 				})
 				//the detail Page
 				.state('signIn', {
@@ -50,3 +51,78 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 	});
 	};
 }]);
+
+
+
+    //add the recipe from the detail controller
+
+    //the list controller, let user interact will all the lists
+    myApp.controller('ListCtrl',["$scope", "$http","ListService", function($scope, $http, ListService){
+		$scope.lists = CartService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}
+
+        //delete specific list
+		$scope.deleteList= function(){
+			ListService.deleteList(listName);
+			$scope.lists = ListService.lists;
+			alert("You successfuly deleted that!")
+		}
+		
+        //delete specific recipe object
+		$scope.removeRecipe = function(recipe){
+		    //find the list 
+            //find that recipe and then delete	
+
+		
+		};
+
+        //create new ListCtrl
+        $scope.addList = function (listName) {
+           var  newList = {};
+           newList.name = $scope.listName;
+           newList.content = [];
+            ListService.addList(listName);
+        }
+
+	}]);
+
+//stored different lists
+myApp.factory('ListService', function(){
+		var service = {};
+		service.lists = [];
+			
+	
+		//add recipe from the detail page to specific list
+        //recipe = new recipe object
+        //listName = ngModel the name
+		service.addRecipe = function(recipe, ListName) {
+            var listIndex = 0;
+            for(var i = 0; i < service.lists.length; i++){
+                var tempList = service.lists[i];
+                if(tempList.name == ListName){
+                    listIndex = i;
+                    service.lists[i].content.push(recipe);
+                }
+            }
+	    };
+
+        //add a new List 
+        service.addList = function(newlist) {
+            service.lists.push(newlist);
+        }
+
+		//delete the list from the lists
+		service.deleteList = function(ListName){
+            var index = 0;
+			 for(var i = 0; i < service.lists.length; i++){
+                var tempList = service.lists[i];
+                //find which list the user want to delete
+                if(tempList.name == ListName){
+                    index = 1;
+                }
+            }
+            service.lists.splice(index,1);
+
+	};
+
+		return service;
+	});
