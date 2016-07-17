@@ -13,7 +13,7 @@ var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstra
 				})
 				//The abstract parent page
 				.state('category', {
-					url:'/vategory',
+					url:'/category',
 					templateUrl: 'partials/category.html' 
 				})
 				 //The order list page 
