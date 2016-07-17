@@ -21,24 +21,23 @@ var myApp = angular.module('RecipeApp', ['ui.router']);
 					  url:'/detail',
    					 templateUrl: 'partials/detail.html' 
 				 })
-				 //The abstract list page
-        		.state('lists', {
-					abstract:true,
-					url:'/lists',
-					templateUrl: 'partials/lists.html', //path of the partial to load
-					controller:"ListCtrl"
-				})
-				//the lists page
-				.state('lists.list', {
-					url:'',
-					templateUrl: 'partials/lists.list.html', //path of the partial to load
-					controller:"ListCtrl"
-				})
-				.state('listDetail', {
-					url:'/lists/:list',
-					templateUrl: 'partials/listDetail.html', //path of the partial to load
-					controller:"ListDetailCtrl"
-				})
+				.state('lists', {
+ 					abstract:true,
+  					url:'/lists',
+  					templateUrl: 'partials/lists.html', //path of the partial to load
+  					controller:"ListCtrl"
+  				})
+ 				//the lists page
+ 				.state('lists.list', {
+ 					url:'',
+ 					templateUrl: 'partials/lists.list.html', //path of the partial to load
+ 					controller:"ListCtrl"
+ 				})
+ 				.state('listDetail', {
+ 					url:'/lists/:list',
+ 					templateUrl: 'partials/listDetail.html', //path of the partial to load
+ 					controller:"ListDetailCtrl"
+ 				})
 			//the detail Page
 			.state('signIn', {
 				url:'/signIn',
@@ -48,30 +47,10 @@ var myApp = angular.module('RecipeApp', ['ui.router']);
 			
 }]);
 
-// myApp.factory('recipeDetails', ['$http','$q', function($http, $q){
-// 	var result;
-// 	function getRecipe(id){
-// 		var deferred = $q.defer();
-// 		$http.get('http://api.yummly.com/v1/api/recipe/' + "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728" + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
-// 			.success(function (data) {
-// 			result = data;
-// 		});
-// 		return {
-// 			getResult: function () {
-// 				return result;
-// 			}
-// 		}
-// 	};
-// }]);
+
 
 myApp.controller('detailsCtrl', ['$scope', '$http', function($scope, $http){
-	// var data = {url:"http://www.tacobueno.com/media/1339/beeftacolarge.png?quality=65"};
-	// console.log(data);
-	// $scope.info = data;
-	// var data = recipeDetails.getRecipe('Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728"').getResult().then(function(data){
-	// 	console.log(data);
-	// })
-	// console.log(data);
+
 	var related;
 	$http.get('http://api.yummly.com/v1/api/recipe/' + "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728" + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
 		.success(function (data) {
@@ -130,10 +109,7 @@ myApp.controller('detailsCtrl', ['$scope', '$http', function($scope, $http){
 		 $scope.showListDetail = function(list){
       	$scope.list = list;
 		  $scope.content = list.content;
-		  console.log("list.content")
-		  console.log(list.content[0]);
-
-    	}
+		}
 
 	}]);
 
