@@ -1,0 +1,47 @@
+img.button{
+    width: 50px;
+}
+/* for cards for the category view */
+tr img {
+    height: 100px;
+    width: 100px;
+}
+
+/* -------------------------- */
+body {
+	background-color: #ffe680;
+}
+
+nav { 
+	margin: 2em;
+}
+#search {
+	margin: 9em;
+}
+#searchBar{
+	height: 2em;
+	font-size: 2em;
+}
+
+#search button {
+	height: 4em;
+	width: 5em;
+}
+
+
+#feature h4, #feature img {
+	text-align: center;
+}
+
+#feature img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 250px;
+	max-height: 200px;
+}
+
+#cardHead {
+    background-color: silver;
+    text-align: center;
+}

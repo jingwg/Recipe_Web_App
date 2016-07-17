@@ -1,20 +1,31 @@
 <main ng-controller="recipiesSearch">
+
+    <div class="container">
+        <div class="row">
+            <div id="custom-search-input">
+                <div class="input-group col-lg-4">
+                    <input type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
+                    <span class="input-group-btn">
+                                    <button type="submit" ng-click="searchItem(searchTerm)" class="btn btn-success">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--
     <section class="orderTable">
         <div class="input">
-            <p id="searchHeading"> Search products
-                </p>
-                    <input type="text" name="search" id="searchTerm" placeholder="Enter a search term..." ng-model="searchTerm">
+            <button type="submit" ng-click="searchItem(searchTerm)">Search</button>
+            <input type="text" name="search" id="searchTerm" placeholder="Enter a search term..." ng-model="searchTerm">
         </div>
+-->
         <table id="orderTable" class="container">
             <tbody alt="table">
                 <tr aria-live="assertive" ng-repeat="item in items">
-                    <td aria-live="assertive" alt="Image"></td>
-                    <td aria-live="assertive" alt="Name">Item: {{item.recipieName}}
-                        <p>{{item.totalTime}}</p>
-                    </td>
-                    <td aria-live="assertive" alt="Price">Price: {{item.ingredientLines}}</td>
+                    <td aria-live="assertive" alt="Name">Item: {{item.recipeName}}</td>
                 </tr>
         </table>
-        <button type="submit" ng-click="searchItem(searchTerm)">Search</button>
     </section>
 </main>
