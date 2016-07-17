@@ -1,0 +1,24 @@
+<main class="container">
+
+<div class="container" >
+<h2>Your Recipe Books</h2>
+
+<a ng-repeat="list in lists" ng-click="showListDetail(list)"><p>{{list.name}}</p></a>
+</div>
+
+
+<section >
+    <h2>List Detail</h2>
+    <table>
+    <tr>
+        <th>Recipe Name</th>
+        <th>Recipe Content</th>
+    </tr>
+    <tr ng-repeat="recipe in content">
+        <td>{{recipe.name}}</td>
+        <td>{{recipe.ingredients.toString()}}</td>
+    </tr>
+    </table>
+
+</section>
+</main>
