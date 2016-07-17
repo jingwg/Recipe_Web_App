@@ -84,5 +84,3 @@ myApp.controller('detailsCtrl', ['$scope', '$http', function($scope, $http){
 	};
 
 }]);
-
-console.log("Script loaded");
