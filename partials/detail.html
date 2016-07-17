@@ -1,0 +1,54 @@
+<!--load styles-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/main.css">
+    <!-- load our script -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+<script src="../js/app.js"></script>
+<main ng-app="RecipeApp">
+    <div ng-controller="detailsCtrl">
+       <div class="photo">
+            <!--<img src="http://www.tacobueno.com/media/1339/beeftacolarge.png?quality=65" alt="food">-->
+            <img ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
+        </div>
+        <div class="info">
+            <p>Name: {{detail.name}}</p>
+            <p>type: {{detail.attributes.course}}</p>
+            <div>
+                <p>Bitter: {{detail.flavors.Bitter}}</p>
+                <p>Meaty: {{detail.flavors.Meaty}}</p>
+                <p>Piquant: {{detail.flavors.Piquant}}</p>
+                <p>Salty: {{detail.flavors.Salty}}</p>
+                <p>Sour: {{detail.flavors.Sour}}</p>
+                <p>Sweet: {{detail.flavors.Sweet}}</p>
+            </div>
+            <div>
+                <p>Ingredients:</p>
+                <p ng-repeat="ingredient in detail.ingredientLines">{{ingredient}}</p>
+            </div>>
+            <div>
+                <img src="../img/share.png" alt="share" class="button">
+                <img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(name, list)">
+                <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button">
+            </div>
+        </div>
+    <div class="nutrition">
+        <table>
+            <tr>
+                <th>Nutrition</th>
+                <th>Values</th>
+            </tr>
+            <tr ng-repeat="item in detail.nutritionEstimates" ng-if="item.value > 0">
+                <td>{{item.description}}</td>
+                <td>{{item.value}} {{item.unit.abbreviation}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="related">
+        
+    </div> 
+    </div>>
+</main>
