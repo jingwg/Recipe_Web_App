@@ -1,0 +1,16 @@
+<main class="container">
+
+<!--show a input model let user type the name-->
+<h3>Create New List</h3>
+
+<!--Input could be show in modal-->
+<div class="form-group">
+		<label for="listName">ListName</label>
+		<input type="text" name="listName" id="listName" class="form-control" ng-model="listName">
+</div>
+<button ng-click="addList(listName)" type="button" class="btn btn-success">Add</button>
+
+<!--display all the list in the lists-->
+<div ui-view></div>
+
+</main>
