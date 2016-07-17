@@ -8,7 +8,11 @@
         <table id="orderTable" class="container">
             <tbody alt="table">
                 <tr aria-live="assertive" ng-repeat="item in items">
-                    <td aria-live="assertive" alt="Name">Item: {{item.recipeName}}</td>
+                    <td aria-live="assertive" alt="Image"></td>
+                    <td aria-live="assertive" alt="Name">Item: {{item.recipieName}}
+                        <p>{{item.totalTime}}</p>
+                    </td>
+                    <td aria-live="assertive" alt="Price">Price: {{item.ingredientLines}}</td>
                 </tr>
         </table>
         <button type="submit" ng-click="searchItem(searchTerm)">Search</button>
