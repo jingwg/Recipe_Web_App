@@ -34,5 +34,3 @@ var myApp = angular.module('RecipeApp', ['ngSanitize','ui.router']);
 				$urlRouterProvider.otherwise('/');
 				
 	}]);
-
-	//some silly code
