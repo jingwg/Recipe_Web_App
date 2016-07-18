@@ -14,17 +14,14 @@
             </div>
         </div>
     </div>
-<!--
-    <section class="orderTable">
-        <div class="input">
-            <button type="submit" ng-click="searchItem(searchTerm)">Search</button>
-            <input type="text" name="search" id="searchTerm" placeholder="Enter a search term..." ng-model="searchTerm">
-        </div>
--->
         <table id="orderTable" class="container">
             <tbody alt="table">
                 <tr aria-live="assertive" ng-repeat="item in items">
                     <td aria-live="assertive" alt="Name">Item: {{item.recipeName}}</td>
+                    <td aria-live="assertive" alt="Name">Type of Dish: {{item.recipeName}}</td>
+                    <td aria-live="assertive" alt="Name">Spicy or Sweet?: {{item.recipeName}}</td>
+                    <td aria-live="assertive" alt="Name">Image: {{item.recipeName}}</td>
+                    <td aria-live="assertive" alt="Name">Rating: {{item.recipeName}}</td>
                 </tr>
         </table>
     </section>
