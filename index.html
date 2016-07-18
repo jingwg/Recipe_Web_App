@@ -56,10 +56,9 @@
 						<li class="active"><a href="#">Category<span class="sr-only">(current)</span></a></li>
 						<li><a ui-sref="lists.list">Favorite</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a ui-sref ="signIn"  ng-show="!userId">Sign-In</a></li>
-						<li ng-controller="signCtrl">
-							<a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a>
+					<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
+						<li><a ui-sref ="signIn"  ng-if="!userId">Sign-In</a></li>
+						<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a>
 						</li>
 				 	</ul>
 
