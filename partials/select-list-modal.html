@@ -1,0 +1,14 @@
+<div class="modal-body">
+  <!--This modal will display all the lists the user had-->
+  <table class="table">
+    <tr ng-repeat="list in lists"  ng-click="select(list)">
+      <td id="listSelection">{{list.name}}</td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <!--This button will let user to add recipe into selected list-->
+  <!--To Fikri: the AddtoList(recipe,list) does not work-->
+  <button class="btn btn-primary" type="button" ng-click="AddtoList(recipe,list)">Add to that List</button>
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

@@ -74,3 +74,12 @@ nav {
     background-color: darkorange;
     text-align: center;
 }
+
+form{
+    padding-top: 1em;
+}
+
+#listSelection{
+    cursor: pointer;
+
+}
