@@ -1,0 +1,76 @@
+img.button{
+    width: 50px;
+}
+/* for cards for the category view */
+#card {
+    max-width: 75%;
+}
+#cardHead {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: brown;
+    padding-top: 0.7em;
+    padding-bottom: 1em;
+    margin-bottom: 0em;
+    width: 100;
+}
+div > img {
+    margin-top: 0em;
+    padding-top: 0em;
+    width: 100%;
+    height:100%;
+    max-width: 100%;
+    min-height:200px;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
+}
+
+#cardDetails {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: darkorange;
+    margin-top: 0em;
+    padding-top: 1.5em;
+    padding-bottom: 3em;
+    text-align: center;
+
+}
+
+
+
+/* -------------------------- */
+body {
+	background-color: #ffe680;
+}
+
+nav { 
+	margin: 2em;
+}
+#search {
+	margin: 9em;
+}
+#searchBar{
+	height: 2em;
+	font-size: 2em;
+}
+
+#search button {
+	height: 4em;
+	width: 5em;
+}
+
+
+#feature h4, #feature img {
+	text-align: center;
+}
+
+#feature img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 250px;
+	max-height: 200px;
+}
+
+#cardHead {
+    background-color: darkorange;
+    text-align: center;
+}
