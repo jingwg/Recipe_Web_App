@@ -48,57 +48,6 @@ var myApp = angular.module('RecipeApp', ['ui.router']);
 			
 }]);
 
-// myApp.factory('recipeDetails', ['$http','$q', function($http, $q){
-// 	var result;
-// 	function getRecipe(id){
-// 		var deferred = $q.defer();
-// 		$http.get('http://api.yummly.com/v1/api/recipe/' + "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728" + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
-// 			.success(function (data) {
-// 			result = data;
-// 		});
-// 		return {
-// 			getResult: function () {
-// 				return result;
-// 			}
-// 		}
-// 	};
-// }]);
-
-myApp.controller('detailsCtrl', ['$scope', '$http', function($scope, $http){
-	// var data = {url:"http://www.tacobueno.com/media/1339/beeftacolarge.png?quality=65"};
-	// console.log(data);
-	// $scope.info = data;
-	// var data = recipeDetails.getRecipe('Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728"').getResult().then(function(data){
-	// 	console.log(data);
-	// })
-	// console.log(data);
-	var related;
-	$http.get('http://api.yummly.com/v1/api/recipe/' + "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728" + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
-		.success(function (data) {
-			$scope.detail = data;
-		//result = data;
-		related = data.attributes.course[0];
-		console.log(related);
-		console.log(data);
-		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q' + related).success(function(result){
-			console.log(result);
-			$scope.related = result;
-		})
-	});
-	//$scope.data = result;
-	console.log(related);
-	//var related = result.course[0];
-	//console.log(related);
-	// $http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822' + )
-
-	$scope.addToList = function (name, list) {
-		
-	};
-
-}]);
-
-
-
     //add the recipe from the detail controller
 
     //the list controller, let user interact will all the lists
@@ -137,9 +86,6 @@ myApp.controller('detailsCtrl', ['$scope', '$http', function($scope, $http){
 
 	}]);
 
-
-
-
 //stored different lists
 myApp.factory('ListService', function(){
 		var service = {};
@@ -163,6 +109,7 @@ myApp.factory('ListService', function(){
                     service.lists[i].content.push(recipe);
                 }
             }
+			console.log(service.lists);
 	    };
 
         //add a new List 
@@ -183,8 +130,64 @@ myApp.factory('ListService', function(){
                 }
             }
             service.lists.splice(index,1);
-
 	};
 
 		return service;
 	});
+
+myApp.controller('detailsCtrl', ['$scope', '$http', 'ListService', function($scope, $http, ListService){
+	// var data = {url:"http://www.tacobueno.com/media/1339/beeftacolarge.png?quality=65"};
+	// console.log(data);
+	// $scope.info = data;
+	// var data = recipeDetails.getRecipe('Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728"').getResult().then(function(data){
+	// 	console.log(data);
+	// })
+	// console.log(data);
+	var related;
+	$http.get('http://api.yummly.com/v1/api/recipe/' + "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728" + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
+		.success(function (data) {
+			$scope.detail = data;
+		//result = data;
+		related = data.attributes.course[0];
+		console.log(related);
+		console.log(data);
+		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q' + related).success(function(result){
+			console.log(result);
+			$scope.relateds = result.matches;
+		})
+	});
+	$scope.lists = [
+      {name:'list1', shade:'dark'},
+      {name:'list2', shade:'light'},
+      {name:'list3', shade:'dark'},
+      {name:'list4', shade:'dark'},
+      {name:'list5', shade:'light'}
+    ];
+    $scope.myLists = $scope.lists[2];
+	//$scope.data = result;
+	console.log(related);
+	//var related = result.course[0];
+	//console.log(related);
+	// $http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822' + )
+
+	// $scope.data = {
+	// 	availableOptions: [
+	// 	{id: '1', name: 'Option A'},
+	// 	{id: '2', name: 'Option B'},
+	// 	{id: '3', name: 'Option C'}
+	// 	],
+	// 	selectedOption: {id: '3', name: 'Option C'} //This sets the default value of the select in the ui
+    // };
+
+	
+
+	$scope.addToList = function (detail, myName) {
+		
+		var recipeName = detail.name;
+		var selectedListName = $scope.myLists.name;
+		//ListService.addRecipe("test", "list1");
+		console.log(selectedListName);
+		console.log(ListService.lists)
+	};
+
+}]);

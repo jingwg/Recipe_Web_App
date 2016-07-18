@@ -7,32 +7,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
 <script src="../js/app.js"></script>
+<script src="../js/script.js"></script>
 <main ng-app="RecipeApp">
-    <div ng-controller="detailsCtrl">
-       <div class="photo">
-            <!--<img src="http://www.tacobueno.com/media/1339/beeftacolarge.png?quality=65" alt="food">-->
-            <img ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
-        </div>
-        <div class="info">
-            <p>Name: {{detail.name}}</p>
-            <p>type: {{detail.attributes.course}}</p>
-            <div>
-                <p>Bitter: {{detail.flavors.Bitter}}</p>
-                <p>Meaty: {{detail.flavors.Meaty}}</p>
-                <p>Piquant: {{detail.flavors.Piquant}}</p>
-                <p>Salty: {{detail.flavors.Salty}}</p>
-                <p>Sour: {{detail.flavors.Sour}}</p>
-                <p>Sweet: {{detail.flavors.Sweet}}</p>
+    <div class="container-fluid" ng-controller="detailsCtrl">
+        <div class="row">
+            <div class="col-md-4"><img class="img-thumbnail img-fluid" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image"></div>
+            <div class="col-md-4" class="info">
+                <p>Name: {{detail.name}}</p>
+                <p>type: {{detail.attributes.course}}</p>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">Taste data</h3></div>
+                    <div class="panel-body">
+                    <p>Bitter: {{detail.flavors.Bitter}}</p>
+                    <p>Meaty: {{detail.flavors.Meaty}}</p>
+                    <p>Piquant: {{detail.flavors.Piquant}}</p>
+                    <p>Salty: {{detail.flavors.Salty}}</p>
+                    <p>Sour: {{detail.flavors.Sour}}</p>
+                    <p>Sweet: {{detail.flavors.Sweet}}</p>
+                    </div>
+                </div>
+                <div>
+                    <p>Ingredients:</p>
+                    <p ng-repeat="ingredient in detail.ingredientLines">{{ingredient}}</p>
+                </div>
+                <div>
+                    <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="//static.addtoany.com/buttons/share_save_256_24.png" width="256" height="24" border="0" alt="Share"/></a>
+                    <img src="../img/share.png" alt="share" class="button">
+                    <select ng-model="myLists" ng-options="list.name for list in lists"></select>
+                    <img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(detail, list.name)">
+                    <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">
+                </div>
             </div>
-            <div>
-                <p>Ingredients:</p>
-                <p ng-repeat="ingredient in detail.ingredientLines">{{ingredient}}</p>
-            </div>>
-            <div>
-                <img src="../img/share.png" alt="share" class="button">
-                <img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(name, list)">
-                <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button">
+            <div class="related" class="col-md-4">
+                <div ng-repeat="related in relateds">
+                <img ng-src="{{related.smallImageUrls[0]}}" alt="">
+                <p >{{related.recipeName}}</p>
+            </div>
             </div>
         </div>
     <div class="nutrition">
@@ -47,8 +59,5 @@
             </tr>
         </table>
     </div>
-    <div class="related">
-        
-    </div> 
-    </div>>
+    </div>
 </main>
