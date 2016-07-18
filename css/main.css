@@ -27,6 +27,6 @@ nav {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 250px;
-	max-height: 200px;
+	width: 200px;
+	height: 150px;
 }
