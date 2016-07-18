@@ -65,6 +65,7 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 		//like put it on the $scope to show it in the view!
 		$scope.things = data.matches;
 		console.log($scope.things);
+		//$scope.things.smallImageUrls[0];
 	});
 	//var searchTerm = $scope.searchTerm;
 	$scope.searchItem = function(searchTerm) {
