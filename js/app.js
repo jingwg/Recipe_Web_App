@@ -116,10 +116,22 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 
     	}
 
-	}]);
+	}])
 
 
+myApp.controller('ListDetailCtrl',["$scope","$stateParams","ListService","$filter", function($scope,$stateParams, ListService, $filter){
+	var lists = ListService.lists;
+	var targetList = [];
+	for(var i = 0; i < lists.length;i++){
+		var tempList = lists[i];
+		if(tempList.name == $stateParams.list){
+			targetList = lists[i];
+		}
+	}	
+	$scope.recipes = targetList.content
+	console.log($scope.recipes);
 
+}])
 
 //stored different lists
 myApp.factory('ListService', function(){
