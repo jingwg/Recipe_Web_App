@@ -1,7 +1,7 @@
 
 'use strict';
 
-var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap']);
+var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap','firebase']);
 
 	myApp.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 		
@@ -43,7 +43,8 @@ var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstra
 				//the detail Page
 				.state('signIn', {
 					url:'/signIn',
-					templateUrl: 'partials/signIn.html'//path of the partial to load
+					templateUrl: 'partials/signIn.html',//path of the partial to load
+					controller:'signCtrl'
 				})
 				//$urlRouterProvider.otherwise('/');
 				//the search Page
@@ -79,7 +80,59 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 	});
 	};
 }]);
+//the signIn controller
+myApp.controller('signCtrl',['$scope', '$firebaseAuth', '$firebaseObject',function($scope, $firebaseAuth,$firebaseObject){
+	//the main firebase reference
 
+	var Auth = $firebaseAuth();
+	$scope.newUser = {};
+	var baseRef = firebase.database().ref();
+	var usersRef = baseRef.child('users'); //refers to "users" value
+
+	$scope.signUp = function(){
+		console.log($scope.newUser.handle);		
+		console.log($scope.newUser.avatar);
+	//create user
+		Auth.$createUserWithEmailAndPassword($scope.newUser.email, $scope.newUser.password)
+		.then(function(firebaseUser) {
+		//display loginView
+		$scope.userId = firebaseUser.uid;
+		console.log('user created: '+firebaseUser.uid);
+		var userData = {'email':$scope.newUser.email,'password': $scope.newUser.password };
+		var newUserRef = usersRef.child(firebaseUser.uid);
+		newUserRef.set(userData); //set the key's value to be the object you created
+		})
+		.catch(function(error) { //report any errors
+		console.log(error);
+		});
+
+		$scope.users = $firebaseObject(usersRef);
+		console.log($scope.users)
+	}
+	Auth.$onAuthStateChanged(function(firebaseUser) {
+		if(firebaseUser){
+			console.log('logged in');
+			 $scope.userId =  firebaseUser.uid ;
+		}
+		else {
+			console.log('logged out');
+			 $scope.userId = undefined;
+		}
+		});
+
+		$scope.signOut = function() {
+			Auth.$signOut(); //AngularFire method
+			};
+
+			//respond to "Sign In" button
+		$scope.signIn = function() {
+			Auth.$signInWithEmailAndPassword($scope.newUser.email, $scope.newUser.password); //AngularFire method
+			};
+
+
+
+
+}])
 
 //The controller I designed for the button to show the modal
 myApp.controller('JingwenDetailCtrl',['$scope', '$http','$uibModal','ListService',function($scope,$http,$uibModal,ListService){

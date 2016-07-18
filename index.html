@@ -13,6 +13,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+   	<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+		<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAAV_gqWB_7Q1W_6klaHCf5Jdn_gpjg1nE",
+			authDomain: "bon-appetit-1b1a9.firebaseapp.com",
+			databaseURL: "https://bon-appetit-1b1a9.firebaseio.com",
+			storageBucket: "bon-appetit-1b1a9.appspot.com",
+		};
+		firebase.initializeApp(config);
+		</script>
+	<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+
+
 		<!-- load our script -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -35,19 +50,27 @@
 				</div>
 
 <body>
-<!--main view goes here-->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				  	<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Category<span class="sr-only">(current)</span></a></li>
 						<li><a ui-sref="lists.list">Favorite</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Sign-In</a></li>
+					<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
+						<li><a ui-sref ="signIn"  ng-if="!userId">Sign-In</a></li>
+						<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a>
+						</li>
 				 	</ul>
+
 				</div><!-- /.navbar-collapse -->
 	  		</div><!-- /.container-fluid -->
 		</nav>
+
+
+
+
+<div>
+</div>
 
 		<!--main view goes here-->
 		<main ui-view></main>
