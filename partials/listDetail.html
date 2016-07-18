@@ -1,0 +1,15 @@
+<main class="container">
+
+
+    <h2>List Detail</h2>
+    <table>
+    <tr>
+        <th>Recipe Name</th>
+        <th>Recipe Content</th>
+    </tr>
+    <tr ng-repeat="recipe in recipes">
+        <td >{{recipe.name}}</td>
+        <td>{{recipe.ingredients.toString()}}</td>
+    </tr>
+ </table>
+</main>
