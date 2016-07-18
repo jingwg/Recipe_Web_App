@@ -24,7 +24,13 @@ hr {
     padding: 0;
 }
 #card {
-    max-width: 75%;
+    max-width: 90%;
+    max-height: 100%;
+}
+tr#cardRow {
+    max-height: 100%;
+    height: 75%;
+    position: fixed;
 }
 #cardHead {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
