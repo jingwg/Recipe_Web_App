@@ -5,9 +5,9 @@
         <div class="row">
             <div id="custom-search-input">
                 <div class="input-group col-lg-4">
-                    <input type="text" class="search-query form-control" placeholder="Search" ng-bind="$scope.categories" ng-model="searchTerm">
+                    <input type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
                     <span class="input-group-btn">
-                                    <button type="submit" ng-click="searchItem(searchTerm)" class="btn btn-success">
+                                    <button type="button" ui-sref="search({'searchTerm': searchTerm})" class="btn btn-success">
                                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
