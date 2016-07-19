@@ -3,43 +3,6 @@
 
 var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'firebase']);
 
-// myApp.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-
-// 		$stateProvider
-// 			//The home page
-// 			.state('home', {
-// 				url: '/', 
-// 				templateUrl: 'partials/home.html' 
-// 			})
-// 			//The abstract parent page
-// 			.state('category', {
-// 				url:'/vategory',
-// 				templateUrl: 'partials/category.html' 
-// 			})
-// 			 //The order list page 
-// 				.state('detail', {
-// 				  url:'/detail',
-// 					 templateUrl: 'partials/detail.html' 
-// 			 })
-// 			 //The shopping cart page
-//     		.state('list', {
-// 				url:'/list',
-// 				templateUrl: 'partials/list.html' //path of the partial to load
-// 			})
-// 			//the detail Page
-// 			.state('signIn', {
-// 				url:'/signIn',
-// 				templateUrl: 'partials/signIn.html'//path of the partial to load
-// 			})
-// 			//$urlRouterProvider.otherwise('/');
-// 			//the search Page
-// 			.state('search', {
-// 				url:'/search',
-// 				templateUrl: 'partials/search.html'//path of the partial to load
-// 			})
-// 			$urlRouterProvider.otherwise('/');
-
-// }]);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -78,7 +41,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 			templateUrl: 'partials/listDetail.html', //path of the partial to load
 			controller: "ListDetailCtrl"
 		})
-		//the detail Page
+		//the signIn Page
 		.state('signIn', {
 			url: '/signIn',
 			templateUrl: 'partials/signIn.html',//path of the partial to load
@@ -90,9 +53,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 			url: '/search',
 			templateUrl: 'partials/search.html'//path of the partial to load
 		})
+		
 				$urlRouterProvider.otherwise('/');
 
 }]);
+
+
 
 
 
@@ -108,7 +74,10 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 }]);
 
 
+
 myApp.controller('recipiesSearch', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
+
 	$scope.searchItem = function (searchTerm) {
 		var searchObject = $location.search();
 		$location.search('q', searchTerm);
@@ -213,6 +182,7 @@ myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, 
 }]);
 
 //the list controller, let user interact will all the lists
+
 myApp.controller('ListCtrl', ["$scope", "ListService", function ($scope, ListService) {
 	$scope.lists = ListService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}
 
@@ -224,12 +194,17 @@ myApp.controller('ListCtrl', ["$scope", "ListService", function ($scope, ListSer
 		alert("You successfuly deleted that!")
 	}
 
-	//create new List
+	//create new plan
 	$scope.addList = function (listName) {
 		var newList = {};
 		newList.name = $scope.listName;
 		newList.content = [];
         ListService.addList(newList);
+	}
+
+	//random create a new plan
+	$scope.random = function(){
+		ListService.random();
 	}
 
 }])
@@ -244,17 +219,64 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "ListService", "$f
 			targetList = lists[i];
 		}
 	}
-	$scope.recipes = targetList.content
+	//console.log(targetList);
+	$scope.recipes = targetList.items;
+	
 	console.log($scope.recipes);
+	var rowCount = $('#threeColor').length;
+	if (rowCount % 3 == 1) {
+		$('#threeColor:last').css("background", "grey");  
+	}
+	else if (rowCount % 3 == 2) {
+		$('#threeColor:nth-last-child(5)').css("background", "yellow");   
+		$('#threeColor:nth-last-child(2)').css("background", "grey");   	 	 
+		$('#threeColor:last').css("background", "grey");  
+	}
 
 }])
 
 //stored different lists
-myApp.factory('ListService', function () {
+
+myApp.factory('ListService', ['$http',function ($http) {
 	var service = {};
 	service.lists = [];
-	//The defualt list
-	var testList = { name: "favorite", content: [] };
+	service.randomCount = 1;
+	// create the random meal plan
+	service.random = function(){
+	$http.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f "
+	).then(function (response) {
+			var data = response.data;
+
+			data.name = "Random Meal Plan" + service.randomCount;
+			var meals = data.items;
+			for(var i = 0; i < meals.length; i++){
+				//change the meal name
+				var value = JSON.parse(meals[i].value);
+				meals[i].name = value.title;
+				
+				//change the slot
+				var slot = meals[i].slot;
+				if(slot == 1){
+					 meals[i].slot = "breakfast";
+				}else if(slot == 2){
+					meals[i].slot = "lunch";
+				}else if(slot == 3){
+					meals[i].slot = "dinner";
+				}
+				//remove day 
+				if(i%3!=0){
+					meals[i].day = "";
+				}
+				
+				}
+			service.lists.push(data);
+			service.randomCount ++;
+	})
+	}//end of random 
+
+	//the default list
+	var testOb = {name:"kale smothie"}
+	var testList = { name: "favorite", items: [testOb] };
 	service.lists.push(testList);
 
 
@@ -294,4 +316,6 @@ myApp.factory('ListService', function () {
 	};
 
 	return service;
-});
+
+}]);
+

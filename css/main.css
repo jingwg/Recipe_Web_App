@@ -110,3 +110,19 @@ form{
     cursor: pointer;
 
 }
+
+#detailTable {
+    width: 100%;
+}
+
+#detailTable th {
+    height: 50px;
+}
+
+#detailTable th, #detailTable td {
+    padding: 15px;
+    text-align: left;
+}
+#threeColor:nth-child(6n-2), #threeColor:nth-child(6n-3), #threeColor:nth-child(6n-4) {
+    background:  #ff9966;
+}
