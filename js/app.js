@@ -112,24 +112,23 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', function ($s
 
 }]);
 //the signIn controller
-myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject', function ($scope, $firebaseAuth, $firebaseObject) {
+myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject',"ListService", function ($scope, $firebaseAuth, $firebaseObject,ListService) {
 	//the main firebase reference
-
+	$scope.lists = ListService.lists;
+	console.log($scope.lists);
 	var Auth = $firebaseAuth();
 	$scope.newUser = {};
 	var baseRef = firebase.database().ref();
 	var usersRef = baseRef.child('users'); //refers to "users" value
 
 	$scope.signUp = function () {
-		console.log($scope.newUser.handle);
-		console.log($scope.newUser.avatar);
 		//create user
 		Auth.$createUserWithEmailAndPassword($scope.newUser.email, $scope.newUser.password)
 			.then(function (firebaseUser) {
 				//display loginView
 				$scope.userId = firebaseUser.uid;
 				console.log('user created: ' + firebaseUser.uid);
-				var userData = { 'email': $scope.newUser.email, 'password': $scope.newUser.password };
+				var userData = { 'email': $scope.newUser.email, 'password': $scope.newUser.password, 'lists': $scope.lists};
 				var newUserRef = usersRef.child(firebaseUser.uid);
 				newUserRef.set(userData); //set the key's value to be the object you created
 			})
@@ -204,10 +203,19 @@ myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, 
 }]);
 
 //the list controller, let user interact will all the lists
-
-myApp.controller('ListCtrl', ["$scope", "ListService", function ($scope, ListService) {
+myApp.controller('ListCtrl', ["$scope", "ListService","$firebaseObject" ,function ($scope, ListService,$firebaseObject) {
 	$scope.lists = ListService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}
+	//reference to database
+	var rootRef = firebase.database().ref();
+	//reference to "users" value
+	var usersRef = rootRef.child('users');
 
+	//problem:
+	// how to get the userID and save the changes they made to the firebase database
+	// how to display their data form the firebase database 
+
+
+	
 	//delete specific list
 	$scope.deleteList = function (listName) {
 		console.log(listName);
@@ -257,15 +265,17 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "ListService", "$f
 
 }])
 
-//stored different lists
-
+//service stored different lists
 myApp.factory('ListService', ['$http',function ($http) {
+	
+
 	var service = {};
 	service.lists = [];
 	service.randomCount = 1;
 	// create the random meal plan
 	service.random = function(){
-	$http.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f "
+	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
+	$http.get(" "
 	).then(function (response) {
 			var data = response.data;
 
@@ -336,6 +346,8 @@ myApp.factory('ListService', ['$http',function ($http) {
 		service.lists.splice(index, 1);
 
 	};
+
+
 
 	return service;
 
