@@ -4,7 +4,7 @@
 		<label for="searchTerm"><i class="fa fa-search" aria-label="Search"></i></label>
 		<input type="text" name="search" id="searchTerm" placeholder="Search your recipe book..." ng-model="searchTerm">
 </form>
-<h2>Your Recipe Books</h2>
+<h2>Your Meal Plans</h2>
 <!--Link to specific list ng-click="showListDetail(list)" -->
 <div class="alert alert-warning alert-dismissible" role="alert" ng-repeat="list in lists | filter:searchTerm " id="list">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteList(list.name)"><span aria-hidden="true">&times;</span></button>

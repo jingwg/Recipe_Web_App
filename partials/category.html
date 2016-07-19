@@ -1,130 +1,92 @@
-<main>
-    <!--
-    <div class="col-sm-6 col-lg-4">
-        <div class="card">
-            <h1>Appetizers</h1>
-            <img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Appetizers
-            <p>In essence, a card is just a rectangular region which contains content. This content could be text, images, lists,
-                etc... The card UI methaphor dictates the interaction and layout of these regions.</p>
-        </div>
-    </div>
-    -->
+<main ng-controller="recipiesSearch">
     <div class="container" id="cardGrouping">
+        <h2>Categories</h2>
+        <hr></hr>
+        <hr></hr>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Appetizers</h1>
+            <h3 id="cardHead">Appetizers</h3>
                 <img id="cardImage" src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">
                 <p id="cardDetails">Click here for some delicious appetizers</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Breakfast</h1>
+            <h3 id="cardHead">Breakfast</h3>
                 <img id="cardImage" src="http://surfstrengthcoach.com/wp-content/uploads/2011/03/breakfast.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Make the best breakfast of your life</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Indian</h1>
+            <h3 id="cardHead">Indian</h3>
                 <img id="cardImage" src="http://www.wasslaweekly.com/wp-content/uploads/2012/03/Indian-Food.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Naan, dosai, and so much more</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">American</h1>
+            <h3 id="cardHead">American</h3>
                 <img id="cardImage" src="http://static3.businessinsider.com/image/512b7fa3ecad04e11c000001-1200/youve-seen-the-most-american-foods.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Choose from the red, white, and blue</p>
         </div>
 
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Soup</h1>
+            <h3 id="cardHead">Soup</h3>
                 <img id="cardImage" src="http://en.aleppofood.com/recipe-images/Vegetables-Soup.jpeg">
                 <p id="cardDetails">Click here for some delicious appetizers</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Dessert</h1>
+            <h3 id="cardHead">Dessert</h3>
                 <img id="cardImage" src="http://www.hercampus.com/sites/default/files/2015/04/05/raspberry_dessert.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">taming your sweet tooth is 1 click away</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Drinks</h1>
+            <h3 id="cardHead">Drinks</h3>
                 <!--Credit Goes to Emma Magazine for image-->
                 <img id="cardImage" src="http://www.emme-magazine.com/wp-content/uploads/2014/03/alchol2.jpg#drinks%201600x1132">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Quench your thirst</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Snacks</h1>
+            <h3 id="cardHead">Snacks</h3>
             <!--credit goes to mimizackery-->
                 <img id="cardImage" src="http://mimizackery.com/wp-content/uploads/2014/01/healthy-snacks.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Just want a snack?</p>
         </div>
 
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Asian</h1>
+            <h3 id="cardHead">Asian</h3>
                 <img id="cardImage" src="http://www.photos-public-domain.com/wp-content/uploads/2011/03/asian-food-with-rice-pyramid.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">A plethora of choices await</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Pasta</h1>
+            <h3 id="cardHead">Pasta</h3>
                 <img id="cardImage" src="http://4.bp.blogspot.com/-0W54yZnooTM/TVr38NYVa5I/AAAAAAAABk4/EUUxN9o0un8/s1600/Pasta+with+Rose+Sauce.JPG">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Pasta</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Fish</h1>
+            <h3 id="cardHead">Fish</h3>
                 <img id="cardImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Fish_Dish_-_Egypt%2C_New_Kingdom%2C_Dynasty_18%2C_reign_of_Thutmose_III_to_Amunhotep_II%2C_c._1479-1400_BC%2C_steatite_-_Brooklyn_Museum_-_Brooklyn%2C_NY_-_DSC08661.JPG/1024px-Fish_Dish_-_Egypt%2C_New_Kingdom%2C_Dynasty_18%2C_reign_of_Thutmose_III_to_Amunhotep_II%2C_c._1479-1400_BC%2C_steatite_-_Brooklyn_Museum_-_Brooklyn%2C_NY_-_DSC08661.JPG">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Fish</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Vegetarian</h1>
+            <h3 id="cardHead">Vegetarian</h3>
                 <img id="cardImage" src="http://theworldsbestever.com/blog/wp-content/uploads/2010/08/backedsummertomatos.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Don't eat meat? Choices await you</p>
         </div>
 
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Side dishes</h1>
+            <h3 id="cardHead">Side dishes</h3>
                 <img id="cardImage" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Vegetable_side_dish.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Need a little something more to complete you meal?</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Lunch</h1>
+            <h3 id="cardHead">Lunch</h3>
                 <img id="cardImage" src="http://2.bp.blogspot.com/-MM4MhTUW3Es/UTibO2kZVvI/AAAAAAAAKl4/BE1YVYgik6w/s1600/DSC_0028.JPG">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Lunch.</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Dinner</h1>
+            <h3 id="cardHead">Dinner</h3>
                 <img id="cardImage" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Flickr_qmnonic_123431456--Kraft_Dinner_and_veggie_dogs.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">Dinner.</p>
         </div>
         <div id="card" class="col-sm-4 col-lg-3 container">
-            <h3 id="cardHead">Salad</h1>
+            <h3 id="cardHead">Salad</h3>
                 <img id="cardImage" src="https://upload.wikimedia.org/wikipedia/commons/9/94/Salad_platter.jpg">
-                <p id="cardDetails">Click here for some delicious appetizers</p>
+                <p id="cardDetails">A healthy choice</p>
         </div>
-
     </div>
-    <!--
-    <table class="container">
-        <p> Categories </p>
-        <tr id="Category List 1">
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Appetizers</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Breakfast</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Indian</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">American</td>
-        </tr>
-        <tr id="Category List 2">
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Soup</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Dessert</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Drinks</td>
-            <td><img src="http://www.homedressing.net/wp-content/uploads/2012/12/Christmas-Appetizers-016.jpg">Snacks</td>
-        </tr>
-        <tr id="Category List 3">
-            <td>Asian</td>
-            <td>Pasta</td>
-            <td>Fish</td>
-            <td>Vegetarian</td>
-        </tr>
-        <tr id="Category List 4">
-            <td>Side dishes</td>
-            <td>Lunch</td>
-            <td>Dinner</td>
-            <td>Salad</td>
-        </tr>
-    </table>
--->
-
 </main>

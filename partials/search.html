@@ -1,28 +1,32 @@
 <main ng-controller="recipiesSearch">
-
+    <h3>Stuff left to do: Change the search results into modern looking cards and fix in images, 
+        create a link to go to details page based on the ID, Link search categories to search bar.</h3>
     <div class="container">
         <div class="row">
             <div id="custom-search-input">
                 <div class="input-group col-lg-4">
-                    <input type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
+                    <input type="text" class="search-query form-control" placeholder="Search" ng-bind="$scope.categories" ng-model="searchTerm">
                     <span class="input-group-btn">
                                     <button type="submit" ng-click="searchItem(searchTerm)" class="btn btn-success">
-                                        <span class=" glyphicon glyphicon-search"></span>
+                                        <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
                 </div>
             </div>
         </div>
     </div>
+    
         <table id="orderTable" class="container">
-            <tbody alt="table">
-                <tr aria-live="assertive" ng-repeat="item in items">
-                    <td aria-live="assertive" alt="Name">Item: {{item.recipeName}}</td>
-                    <td aria-live="assertive" alt="Name">Type of Dish: {{item.recipeName}}</td>
-                    <td aria-live="assertive" alt="Name">Spicy or Sweet?: {{item.recipeName}}</td>
-                    <td aria-live="assertive" alt="Name">Image: {{item.recipeName}}</td>
-                    <td aria-live="assertive" alt="Name">Rating: {{item.recipeName}}</td>
-                </tr>
+            <tbody alt="table body">
+                <div id="searchCard" data-role="collapsible" class="container">
+                <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
+                    <img src="{{item.smallImageUrls[0]}}">
+                    <li id="recipeName" aria-live="assertive" alt="Name"> {{item.recipeName}}</li>
+                    <li id="attribute" aria-live="assertive" alt="Name"> Type of Dish: {{item.attribute.course[0]}}</li>
+                    <li id="flavor" aria-live="assertive" alt="Name"> Spicy or Sweet?: {{item.recipeName}}</li>
+                    <li id="rating" aria-live="assertive" alt="Name"> Rating: {{item.rating}}</li>
+                </ul>
+                </div>
         </table>
     </section>
 </main>
