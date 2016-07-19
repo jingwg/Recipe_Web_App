@@ -109,37 +109,16 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
 myApp.controller('recipiesSearch', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-	/*
-	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=chicken').then(function (response) {
-		var data = response.data;
-		//do something with the data from the response...
-		//like put it on the $scope to show it in the view!
-		$scope.things = data.matches;
-		console.log($scope.things);
-		//$scope.things.smallImageUrls[0];
-	});
-	//var searchTerm = $scope.searchTerm;
-	*/
 	$scope.searchItem = function (searchTerm) {
+		var searchObject = $location.search();
+		$location.search('q', searchTerm);
+		console.log(searchObject);
 		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' + searchTerm).then(function (response) {
 			var data = response.data;
-			//do something with the data from the response...
-			//like put it on the $scope to show it in the view!
+			console.log(searchTerm);
 			$scope.items = data.matches;
-			//console.log($scope.items.attribute.course[0]);
-			//console.log($scope.items[0].recipeName)
-			var searchObject = $location.search();
-			$location.search('q', searchTerm);
-			console.log(searchObject);
 		});
 	};
-
-	//var searchTerm = //get the term
-	//if(searchTerm exists){
-	//	serachitem(searchTerm);
-	//}
-	
-
 }]);
 //the signIn controller
 myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject', function ($scope, $firebaseAuth, $firebaseObject) {
