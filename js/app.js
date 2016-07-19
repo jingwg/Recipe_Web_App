@@ -44,14 +44,14 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 		//the signIn Page
 		.state('signIn', {
 			url: '/signIn',
-			templateUrl: 'partials/signIn.html',//path of the partial to load
+			templateUrl: 'partials/signIn.html',
 			controller: 'signCtrl'
 		})
 		//$urlRouterProvider.otherwise('/');
 		//the search Page
 		.state('search', {
 			url: '/search/:searchTerm',
-			templateUrl: 'partials/search.html'//path of the partial to load
+			templateUrl: 'partials/search.html'
 		})
 		$urlRouterProvider.otherwise('/');
 
@@ -95,62 +95,31 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 		});
 	}
 }]);
+
 //the signIn controller
-myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject',"ListService", function ($scope, $firebaseAuth, $firebaseObject,ListService) {
-	//the main firebase reference
-	$scope.lists = ListService.lists;
-	console.log($scope.lists);
-	var Auth = $firebaseAuth();
-	$scope.newUser = {};
-	var baseRef = firebase.database().ref();
-	var usersRef = baseRef.child('users'); //refers to "users" value
+myApp.controller('signCtrl', ['$scope',"FirebaseService", function ($scope,FirebaseService) {
+		$scope.newUser = {}; //for sign-in
 
-	$scope.signUp = function () {
-		//create user
-		Auth.$createUserWithEmailAndPassword($scope.newUser.email, $scope.newUser.password)
-			.then(function (firebaseUser) {
-				//display loginView
-				$scope.userId = firebaseUser.uid;
-				console.log('user created: ' + firebaseUser.uid);
-				var userData = { 'email': $scope.newUser.email, 'password': $scope.newUser.password, 'lists': $scope.lists};
-				var newUserRef = usersRef.child(firebaseUser.uid);
-				newUserRef.set(userData); //set the key's value to be the object you created
-			})
-			.catch(function (error) { //report any errors
-				console.log(error);
-			});
+		$scope.signUp = function() {
+			var user = {"email":$scope.newUser.email, "password": $scope.newUser.password};
+			FirebaseService.signUp(user);
+		};
+		$scope.signIn = function() {
+			var user = {"email":$scope.newUser.email, "password": $scope.newUser.password,"lists": FirebaseService.lists};
+			FirebaseService.signIn(user);
 
-		$scope.users = $firebaseObject(usersRef);
-		console.log($scope.users)
-	}
-	Auth.$onAuthStateChanged(function (firebaseUser) {
-		if (firebaseUser) {
-			console.log('logged in');
-			$scope.userId = firebaseUser.uid;
-		}
-		else {
-			console.log('logged out');
-			$scope.userId = undefined;
-		}
-	});
+		};
 
-	$scope.signOut = function () {
-		Auth.$signOut(); //AngularFire method
-	};
-
-	//respond to "Sign In" button
-	$scope.signIn = function () {
-		Auth.$signInWithEmailAndPassword($scope.newUser.email, $scope.newUser.password); //AngularFire method
-	};
-
-
-
+		$scope.signOut = function() {
+			FirebaseService.signOut();
+			$scope.showSignOut = true;
+		};
 
 }])
 
 //The controller I designed for the button to show the modal
-myApp.controller('JingwenDetailCtrl', ['$scope', '$http', '$uibModal', 'ListService', function ($scope, $http, $uibModal, ListService) {
-	$scope.lists = ListService.lists;
+myApp.controller('JingwenDetailCtrl', ['$scope', '$http', '$uibModal', 'FirebaseService', function ($scope, $http, $uibModal, FirebaseService) {
+	$scope.lists = FirebaseService.lists;
 	//show modal
 	$scope.showListModal = function () {
 		var modalInstance = $uibModal.open(
@@ -187,24 +156,13 @@ myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, 
 }]);
 
 //the list controller, let user interact will all the lists
-myApp.controller('ListCtrl', ["$scope", "ListService","$firebaseObject" ,function ($scope, ListService,$firebaseObject) {
-	$scope.lists = ListService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}
-	//reference to database
-	var rootRef = firebase.database().ref();
-	//reference to "users" value
-	var usersRef = rootRef.child('users');
-
-	//problem:
-	// how to get the userID and save the changes they made to the firebase database
-	// how to display their data form the firebase database 
-
-
-	
+myApp.controller('ListCtrl', ["$scope", "FirebaseService" ,function ($scope, FirebaseService) {
+	$scope.lists = FirebaseService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}	
 	//delete specific list
 	$scope.deleteList = function (listName) {
 		console.log(listName);
-		ListService.deleteList(listName);
-		$scope.lists = ListService.lists;
+		FirebaseService.deleteList(listName);
+		$scope.lists = FirebaseService.lists;
 		alert("You successfuly deleted that!")
 	}
 
@@ -213,19 +171,19 @@ myApp.controller('ListCtrl', ["$scope", "ListService","$firebaseObject" ,functio
 		var newList = {};
 		newList.name = $scope.listName;
 		newList.content = [];
-        ListService.addList(newList);
+        FirebaseService.addList(newList);
 	}
 
 	//random create a new plan
 	$scope.random = function(){
-		ListService.random();
+		FirebaseService.random();
 	}
 
 }])
 
 //The controllerlet the listDetail page diplays all the recipe in the recipe list
-myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "ListService", "$filter", function ($scope, $stateParams, ListService, $filter) {
-	var lists = ListService.lists;
+myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "FirebaseService", "$filter", function ($scope, $stateParams, FirebaseService, $filter) {
+	var lists = FirebaseService.lists;
 	var targetList = [];
 	for (var i = 0; i < lists.length; i++) {
 		var tempList = lists[i];
@@ -250,6 +208,7 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "ListService", "$f
 }])
 
 //service stored different lists
+/*
 myApp.factory('ListService', ['$http',function ($http) {
 	
 
@@ -337,3 +296,190 @@ myApp.factory('ListService', ['$http',function ($http) {
 
 }]);
 
+/*
+User firebase structure
+[
+	{
+]		"email": "",
+		"password": "",
+		"lists": [
+			[list1],[list2],[list3]
+		]
+
+	}
+]
+
+*/
+
+//all interaction with firebase
+myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebaseArray","$http", function($firebaseAuth, $firebaseObject, $firebaseArray,$http){
+	var service = {};
+	var rootRef = firebase.database().ref();
+	var usersRef = rootRef.child('users');
+	service.userId = "";
+	var currentUserRef;
+	var currentUserObj;
+	var listsRef;
+	var listsObj;
+	var Auth = $firebaseAuth();
+
+
+	service.lists = [];
+	service.randomCount = 1;
+	//the default list
+	var testOb = {name:"kale smothie"}
+	var testList = { name: "favorite", items: [testOb] };
+	service.lists.push(testList);
+
+	//if the auth state changes, add the current user data to firebase
+	Auth.$onAuthStateChanged(function(firebaseUser){
+		if (firebaseUser) {
+			console.log('logged in');
+			service.userId = firebaseUser.uid;
+			currentUserRef = usersRef.child(service.userId);
+			currentUserObj = $firebaseObject(currentUserRef);
+			console.log(currentUserObj);
+			service.currentUser = currentUserObj;
+
+			listsRef = currentUserRef.child('lists');
+			listsObj = $firebaseObject(listsRef);
+		}
+		else {
+			console.log('logged out');
+			service.userId = undefined;
+		}
+	});
+
+	//get the current user
+	service.getUser = function(){
+		return currentUserObj;
+	}
+
+	//add new user to the firebase
+	service.signUp = function(user){
+		//service.currentUser = user;
+		//create user
+		Auth.$createUserWithEmailAndPassword(user.email, user.password)
+			.then(function (firebaseUser) { //first time log in
+				//display loginView
+				service.userId = firebaseUser.uid; //save userID
+				var userData = { 'email': user.email, 'password': user.password};
+				currentUserRef = usersRef.child(firebaseUser.uid);
+				currentUserRef.set(userData); //set the key's value to be the user just  created
+				currentUserObj = $firebaseObject(currentUserRef);
+				service.currentUser = currentUserObj;
+			})
+			.catch(function (error) { //report any errors
+				console.log(error);
+			});
+
+	};//end of sign up
+	service.signIn = function(user){
+		Auth.$signInWithEmailAndPassword(user.email, user.password);
+		console.log("signIn");
+		service.lists = currentUserObj.lists;
+		console.log(service.lists);
+		
+	};
+
+	//every time when log out save the data to firebase
+	service.signOut = function(){
+		console.log("sign out");
+		service.update(service.lists);
+		Auth.$signOut(); //AngularFire method
+		service.currentUser = "";
+
+	};
+
+	//takes in new lists and update it to firebase
+	service.update = function(lists){
+		console.log("lists");
+		console.log(currentUserObj);
+		currentUserObj.lists = lists;
+		console.log(currentUserObj);
+		
+		//bug: the use delete email and password
+		currentUserObj.$save().then(function(){
+			console.log("success save the lists");
+		
+		},function(){
+			console.log('error');
+		})
+	};
+
+	// create the random meal plan
+	service.random = function(){
+	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
+	$http.get(" "
+	).then(function (response) {
+			var data = response.data;
+
+			data.name = "Random Meal Plan" + service.randomCount;
+			var meals = data.items;
+			for(var i = 0; i < meals.length; i++){
+				//change the meal name
+				var value = JSON.parse(meals[i].value);
+				meals[i].name = value.title;
+				
+				//change the slot
+				var slot = meals[i].slot;
+				if(slot == 1){
+					 meals[i].slot = "breakfast";
+				}else if(slot == 2){
+					meals[i].slot = "lunch";
+				}else if(slot == 3){
+					meals[i].slot = "dinner";
+				}
+				//remove day 
+				if(i%3!=0){
+					meals[i].day = "";
+				}
+				
+				}
+			service.lists.push(data);
+			service.randomCount ++;
+	})
+	};
+
+	//add recipe from the detail page to specific list
+	//recipe = new recipe object
+	//listName = ngModel the name
+	service.addRecipe = function (recipe, ListName) {
+		var listIndex = 0;
+		for (var i = 0; i < service.lists.length; i++) {
+			var tempList = service.lists[i];
+			if (tempList.name == ListName) {
+				listIndex = i;
+				service.lists[i].content.push(recipe);
+			}
+		}
+	};
+
+	//add a new List into Lists
+	service.addList = function (newlist) {
+		service.lists.push(newlist);
+		console.log("Add new List");
+		console.log(service.lists);
+	};
+
+	//delete the list from the lists
+	service.deleteList = function (ListName) {
+		var index = 0;
+		for (var i = 0; i < service.lists.length; i++) {
+			var tempList = service.lists[i];
+			//find which list the user want to delete
+			if (tempList.name == ListName) {
+				index = 1;
+			}
+		}
+		service.lists.splice(index, 1);
+
+	};
+	
+
+	return service;
+
+
+
+
+}]);
