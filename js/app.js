@@ -3,6 +3,7 @@
 
 var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'firebase']);
 
+
 myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
 	$stateProvider
@@ -61,7 +62,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 
 
 
-
 myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=').then(function (response) {
 		$scope.message = "HELLO";
@@ -74,7 +74,9 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 }]);
 
 
-myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) {
+
+myApp.controller('recipiesSearch', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+	/*
 	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=chicken').then(function (response) {
 
 		var data = response.data;
@@ -85,6 +87,8 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 		//$scope.things.smallImageUrls[0];
 	});
 	//var searchTerm = $scope.searchTerm;
+
+	*/
 	$scope.searchItem = function (searchTerm) {
 		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' + searchTerm).then(function (response) {
 			var data = response.data;
@@ -93,8 +97,19 @@ myApp.controller('recipiesSearch', ['$scope', '$http', function ($scope, $http) 
 			$scope.items = data.matches;
 			//console.log($scope.items.attribute.course[0]);
 			//console.log($scope.items[0].recipeName)
+
+			var searchObject = $location.search();
+			$location.search('q', searchTerm);
+			console.log(searchObject);
 		});
 	};
+
+	//var searchTerm = //get the term
+	//if(searchTerm exists){
+	//	serachitem(searchTerm);
+	//}
+	
+
 }]);
 //the signIn controller
 myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject', function ($scope, $firebaseAuth, $firebaseObject) {
@@ -189,8 +204,10 @@ myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, 
 }]);
 
 //the list controller, let user interact will all the lists
-myApp.controller('ListCtrl', ["$scope", "$http","ListService", function ($scope, $http, ListService) {
+
+myApp.controller('ListCtrl', ["$scope", "ListService", function ($scope, ListService) {
 	$scope.lists = ListService.lists; // list is an array [list1, list2, list3], list1 = {name:favorite, content: [recipeA, recipeB, recipeC]}
+
 	//delete specific list
 	$scope.deleteList = function (listName) {
 		console.log(listName);
@@ -211,7 +228,6 @@ myApp.controller('ListCtrl', ["$scope", "$http","ListService", function ($scope,
 	$scope.random = function(){
 		ListService.random();
 	}
-
 
 }])
 
@@ -242,6 +258,7 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "ListService", "$f
 }])
 
 //stored different lists
+
 myApp.factory('ListService', ['$http',function ($http) {
 	var service = {};
 	service.lists = [];
@@ -282,7 +299,6 @@ myApp.factory('ListService', ['$http',function ($http) {
 	//the default list
 	var testOb = {name:"kale smothie"}
 	var testList = { name: "favorite", items: [testOb] };
-
 	service.lists.push(testList);
 
 
@@ -322,4 +338,6 @@ myApp.factory('ListService', ['$http',function ($http) {
 	};
 
 	return service;
+
 }]);
+
