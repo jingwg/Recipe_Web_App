@@ -50,19 +50,15 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 		//$urlRouterProvider.otherwise('/');
 		//the search Page
 		.state('search', {
-			url: '/search',
+			url: '/search/:searchTerm',
 			templateUrl: 'partials/search.html'//path of the partial to load
 		})
-		
-				$urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/');
 
 }]);
 
-
-
-
-
 myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
+
 	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=').then(function (response) {
 		$scope.message = "HELLO";
 		var data = response.data.matches;
@@ -73,43 +69,31 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 	});
 }]);
 
+myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', function ($scope, $http, $location, $stateParams) {
 
-
-myApp.controller('recipiesSearch', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 	/*
-	$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=chicken').then(function (response) {
-
-		var data = response.data;
-		//do something with the data from the response...
-		//like put it on the $scope to show it in the view!
-		$scope.things = data.matches;
-		console.log($scope.things);
-		//$scope.things.smallImageUrls[0];
-	});
-	//var searchTerm = $scope.searchTerm;
+		if I have a search term
+				get the data
+				show the data
+		
+		> button 
 
 	*/
-	$scope.searchItem = function (searchTerm) {
-		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' + searchTerm).then(function (response) {
+
+	if($stateParams.searchTerm !== '') {
+		console.log('hi');
+		console.log($stateParams);
+		console.log($stateParams.searchTerm);
+		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' +
+				  $stateParams.searchTerm).then(function (response) {
 			var data = response.data;
-			//do something with the data from the response...
-			//like put it on the $scope to show it in the view!
-			$scope.items = data.matches;
-			//console.log($scope.items.attribute.course[0]);
-			//console.log($scope.items[0].recipeName)
 
-			var searchObject = $location.search();
-			$location.search('q', searchTerm);
+			var searchObject = $stateParams.searchTerm;
+			// $location.search('q', searchTerm);
 			console.log(searchObject);
+			$scope.items = data.matches;
 		});
-	};
-
-	//var searchTerm = //get the term
-	//if(searchTerm exists){
-	//	serachitem(searchTerm);
-	//}
-	
-
+	}
 }]);
 //the signIn controller
 myApp.controller('signCtrl', ['$scope', '$firebaseAuth', '$firebaseObject',"ListService", function ($scope, $firebaseAuth, $firebaseObject,ListService) {
