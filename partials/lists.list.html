@@ -1,24 +1,18 @@
 <main class="container">
-
-<div class="container" >
+<p></p>
+<form role="form" class="form-inline">
+		<label for="searchTerm"><i class="fa fa-search" aria-label="Search"></i></label>
+		<input type="text" name="search" id="searchTerm" placeholder="Search your recipe book..." ng-model="searchTerm">
+</form>
 <h2>Your Recipe Books</h2>
+<!--Link to specific list ng-click="showListDetail(list)" -->
+<div class="alert alert-warning alert-dismissible" role="alert" ng-repeat="list in lists | filter:searchTerm " id="list">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteList(list.name)"><span aria-hidden="true">&times;</span></button>
+<p><a ui-sref="listDetail({'list':list.name})">{{list.name}}</a></p></div>
 
-<a ng-repeat="list in lists" ng-click="showListDetail(list)"><p>{{list.name}}</p></a>
-</div>
 
 
-<section >
-    <h2>List Detail</h2>
-    <table>
-    <tr>
-        <th>Recipe Name</th>
-        <th>Recipe Content</th>
-    </tr>
-    <tr ng-repeat="recipe in content">
-        <td>{{recipe.name}}</td>
-        <td>{{recipe.ingredients.toString()}}</td>
-    </tr>
-    </table>
+
 
 </section>
 </main>

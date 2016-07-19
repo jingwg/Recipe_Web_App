@@ -1,30 +1,43 @@
-img.button{
-    width: 50px;
-}
+
 /* for cards for the category view */
-tr img {
-    height: 100px;
-    width: 100px;
+#card {
+    max-width: 75%;
+}
+#cardHead {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: brown;
+    padding-top: 0.7em;
+    padding-bottom: 1em;
+    margin-bottom: 0em;
+    width: 100;
+}
+/*div > img {
+    margin-top: 0em;
+    padding-top: 0em;
+    width: 100%;
+    height:100%;
+    max-width: 100%;
+    min-height:200px;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
+}*/
+
+#cardDetails {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: darkorange;
+    margin-top: 0em;
+    padding-top: 1.5em;
+    padding-bottom: 3em;
+    text-align: center;
+
 }
 
-.card {
-    background:#FFF;
-    border:1px solid #AAA;
-    border-bottom:3px solid #BBB;
-    padding:0px;
-    margin:15px;
-    overflow:hidden;
+img.related{
+    width: 100%;
 }
 
-.card h1 {
-    margin:0px;
-    padding:10px;
-    padding-bottom:0px;
-}
-.card p {
-    margin:0px;
-    padding:10px;
-}
+
+
 /* -------------------------- */
 body {
 	background-color: #ffe680;
@@ -57,4 +70,268 @@ nav {
 	margin-right: auto;
 	max-width: 250px;
 	max-height: 200px;
+}
+
+#cardHead {
+    background-color: darkorange;
+    text-align: center;
+}
+
+form{
+    padding-top: 1em;
+}
+
+#listSelection{
+    cursor: pointer;
+
+}
+
+div.taste_data{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+
+}
+
+/*#ingredients{
+    border-width: 50px;
+}*/
+
+#cyanBar{
+  background-image: none;
+  background-color: cyan;
+  text-align: left;
+}
+
+#greenBar{
+  background-image: none;
+  background-color: limegreen;
+  text-align: right;
+}
+
+#yellowBar{
+  background-image: none;
+  background-color: yellow;
+  text-align: right;
+}
+
+#blueBar{
+  background-image: none;
+  background-color: mediumblue;
+  text-align: right;
+}
+
+#redbar{
+    background-image: none;
+    background-color: red;
+    text-align: right;
+}
+
+#purpleBar{
+    background-image: none;
+    background-color: #7741c9;
+    text-align: right;
+}
+
+#cyanBar{
+    text-align: center;
+}
+
+.barPercentage{
+    text-align: right;
+    color: white;
+}
+
+progress-bar{
+    text-align: center;
+}
+
+#nutritionTable{
+    background-color: white;
+}
+
+form.no-margin{
+    margin:0px;
+    padding: 0px;
+}
+
+img.fittocontainer{
+    width: 100%;
+}
+
+/*a.capitalize-first{
+    text-transform: capitalize;
+}*/
+
+
+/*.image {
+  width: 250px;
+  float: left;
+  margin: 20px;
+}
+body {
+  font-size: small;
+  line-height: 1.4;
+}
+p {
+  margin: 0;
+}
+
+.performance-facts {
+  border: 1px solid black;
+  margin: 20px;
+  float: left;
+  width: 280px;
+  padding: 0.5rem;
+  table {
+    border-collapse: collapse;
+  }
+}
+.performance-facts__title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 0 0 0.25rem 0;
+}
+.performance-facts__header {
+  border-bottom: 10px solid black;
+  padding: 0 0 0.25rem 0;
+  margin: 0 0 0.5rem 0;
+  p {
+    margin: 0;
+  }
+}
+.performance-facts__table {
+  width: 100%;
+  thead tr {
+    th, td {
+      border: 0;
+    }
+  }
+  th, td {
+    font-weight: normal;
+    text-align: left;
+    padding: 0.25rem 0;
+    border-top: 1px solid black; 
+    white-space: nowrap;
+  }
+  td {
+    &:last-child {
+      text-align: right;
+    }
+  }
+  .blank-cell {
+    width: 1rem;
+    border-top: 0;
+  }
+  .thick-row {
+    th, td {
+      border-top-width: 5px;
+    }
+  }
+}
+.small-info {
+  font-size: 0.7rem;
+}
+
+.performance-facts__table--small {
+  @extend .performance-facts__table;
+  border-bottom: 1px solid #999;
+  margin: 0 0 0.5rem 0;
+  thead {
+    tr {
+      border-bottom: 1px solid black; 
+    }
+  }
+  td {
+    &:last-child {
+      text-align: left;
+    }
+  }
+  th, td {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.performance-facts__table--grid {
+  @extend .performance-facts__table;
+  margin: 0 0 0.5rem 0;
+  td {
+    &:last-child {
+      text-align: left;
+      &::before {
+        content: "•";
+        font-weight: bold;
+        margin: 0 0.25rem 0 0;
+      }
+    }
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+.thick-end {
+  border-bottom: 10px solid black;
+}
+.thin-end {
+  border-bottom: 1px solid black;
+}*/
+
+
+/*style for nutrional label 2*/
+
+#nutritionfacts { 
+    background-color:white; 
+    border:1px solid black; 
+    padding:3px; width:244px; 
+}
+#nutritionfacts td { 
+    color:black; 
+    font-family:'Arial Black','Helvetica Bold',sans-serif; 
+    font-size:8pt; 
+    padding:0; 
+}
+#nutritionfacts td.header { 
+    font-family:'Arial Black','Helvetica Bold',sans-serif; 
+    font-size:28px; 
+    white-space:nowrap; 
+}        
+#nutritionfacts div.label { 
+    float:left;
+    color: black;
+    font-weight: 15px;
+    font-family:'Arial Black','Helvetica Bold',sans-serif; 
+}
+#nutritionfacts div.serving { 
+    font-family:Arial,Helvetica,sans-serif; 
+    font-size:8pt; 
+    text-align:center; 
+}
+#nutritionfacts div.weight { 
+    display:inline; 
+    font-family:Arial,Helvetica,sans-serif; 
+    padding-left:1px; 
+}
+#nutritionfacts div.dv { 
+    display:inline; 
+    float:right; 
+    font-family:'Arial Black','Helvetica Bold',sans-serif; 
+}
+#nutritionfacts table.vitamins td {  
+    font-family:Arial,Helvetica,sans-serif; 
+    white-space:nowrap; 
+    width:33%; 
+}
+#nutritionfacts div.line { 
+    border-top:1px solid black; 
+}
+#nutritionfacts div.labellight { 
+    float:left; 
+    font-family:Arial,Helvetica,sans-serif; 
+}
+#nutritionfacts .highlighted {
+    border:1px dotted grey;
+    padding:2px;
 }

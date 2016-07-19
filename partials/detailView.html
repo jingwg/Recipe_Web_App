@@ -1,0 +1,113 @@
+<!--<main>
+    <div ng-controller="detailsCtrl">
+        <h1>{{detail.name}}</h1>
+        <h3>Categories: {{detail.attributes.course[0]}}<span ng-repeat="course in detail.attributes.course" ng-if="$index >=2">, {{course}}</span></h3>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-rounded img-fluid center-block" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
+                <div class="panel panel-primary taste_data">
+                    <div class="panel-heading"><h3 class="panel-title">Taste data</h3></div>
+                    <div class="panel-body">
+                        <p>Bitter</p>
+                        <div class="progress">
+                        <div class="progress-bar progress-bar-info" ng-style="{'width': detail.flavors.Bitter * 100 + '%'}">
+                        </div>
+                   	    </div>
+                           <p>Meaty</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" ng-style="{'width': detail.flavors.Meaty * 100 + '%'}">
+                        </div>
+                    </div>
+                    <p>Piquant</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" ng-style="{'width': detail.flavors.Piquant * 100 + '%'}">
+                        </div>
+                    </div>
+                    <p>Salty</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="orangeBar" ng-style="{'width': detail.flavors.Salty * 100 + '%'}">
+                        </div>
+                    </div>
+                    <p>Sour</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="purpleBar" ng-style="{'width': detail.flavors.Sour * 100 + '%'}">
+                        </div>
+                    </div>
+                    <span><p>Sweet</p></span>
+                    <div class="progress">
+                        
+                        <div class="progress-bar" id="redbar" ng-style="{'width': detail.flavors.Sweet * 100 + '%'}">
+                            <span class="barPercentage">{{detail.flavors.Sweet*100}}%</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" class="info">
+                
+                <div id="ingredients">
+                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">show ingredients</button>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-block">
+                           <p ng-repeat="ingredient in detail.ingredientLines">{{ingredient}}</p> 
+                        </div>
+                    </div>
+                    <br><a ng-href="{{detail.source.sourceRecipeUrl}}">Get the recipe</a>
+                </div>
+                <br>
+                <div>
+                    <!--<a class="a2a_dd" href="https://www.addtoany.com/share"><img src="//static.addtoany.com/buttons/share_save_256_24.png" width="256" height="24" border="0" alt="Share"/></a>-->
+                    <!--<img src="../img/share.png" alt="share" class="button">-->
+                    <!--<select ng-model="myLists" ng-options="list.name for list in lists"></select>-->
+
+                    <!--drop down select button-->
+                    <div class="btn-group" uib-dropdown is-open="status.isopen" ng-model="lists">
+                        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                            Add to list<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a href="" ng-repeat="list in lists" ng-click="addToList(detail.name, list.name)">{{list.name}}</a></li>
+                            <!--<li role="menuitem"><a href="#">Another action</a></li>
+                            <li role="menuitem"><a href="#">Something else here</a></li>-->
+                            <li class="divider"></li>
+                            <li role="menuitem"><a href="" ng-click="">Create new list</a></li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" ng-click="addToList(detail)">Save</button>
+                    <button type="button" class="btn btn-info" onclick="printPage()">Print</button>
+                    <div id="share"></div>
+                    <!--<img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(detail, list.name)">
+                    <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">-->
+                </div>
+            </div>
+                <div class="related col-md-4">
+                    <div ng-repeat="related in relateds">
+                        <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related">
+                        <a ng-href="/detail/{{related.id}}">{{related.recipeName}}</a>
+                    </div>
+                </div>
+            </div>
+            
+    <div class="nutrition">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                <th>Nutrition</th>
+                <th>Values</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Calories</td>
+                    <td>{{detail.nutritionEstimates[0].value}} {{detail.nutritionEstimates[0].unit.abbreviation}}</td>
+                </tr>
+              <tr ng-repeat="item in detail.nutritionEstimates" ng-if="item.value > 0" ng-hide="$first">
+                <td>{{item.description}}</td>
+                <td>{{item.value}} {{item.unit.abbreviation}}</td>
+            </tr>  
+            </tbody>
+        </table>
+    </div>
+    </div>
+</main>-->
