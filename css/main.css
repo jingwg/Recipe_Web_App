@@ -1,3 +1,21 @@
+header{
+    background-color: saddlebrown;
+    font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
+
+}
+div.headerText {
+    margin-top: 0px;
+    padding: 0.5em;
+    font-size: 2.5em;
+    color: whitesmoke;
+}
+
+#hText {
+    display: inline;
+    font-size: 0.7em;
+}
+
 img.button{
     width: 50px;
 }
@@ -65,7 +83,7 @@ div > img {
 
 /* -------------------------- */
 body {
-	background-color: #ffe680;
+	/*background-color: #ffe680;*/
 }
 
 nav { 
@@ -128,4 +146,19 @@ form{
 }
 #threeColor:nth-child(6n-2), #threeColor:nth-child(6n-3), #threeColor:nth-child(6n-4) {
     background:  #ff9966;
+}
+
+main#home {
+    background-color: white;
+    background-size: 100% 100%;
+    background-image: url(https://pixabay.com/static/uploads/photo/2015/09/02/12/41/dish-918613_960_720.jpg);opacity: 0.8;width: 100vw; height: 85vh; max-width: 100%; max-height: 100%;
+}
+#category a:link, #category a:visited {
+    color: brown;
+    text-decoration: none;
+}
+
+#category a:hover {
+    color: gold;
+    text-decoration: none;
 }
