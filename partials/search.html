@@ -1,6 +1,4 @@
 <main class="searchPage" ng-controller="recipiesSearch">
-    <h3>Stuff left to do: Change the search results into modern looking cards and fix in images, 
-        create a link to go to details page based on the ID, Link search categories to search bar.</h3>
     <div class="container">
         <div class="row">
             <div id="custom-search-input">
@@ -18,13 +16,17 @@
     
         <table id="orderTable" class="container">
             <tbody alt="table body">
-                <div id="searchCard" data-role="collapsible" class="container">
+                <div id="searchCard" data-role="collapsible" >
                 <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
-                    <img src="{{item.smallImageUrls[0]}}">
-                    <li id="recipeName" aria-live="assertive" alt="Name"> {{item.recipeName}}</li>
-                    <li id="attribute" aria-live="assertive" alt="Name"> Type of Dish: {{item.attribute.course[0]}}</li>
-                    <li id="flavor" aria-live="assertive" alt="Name"> Spicy or Sweet?: {{item.recipeName}}</li>
-                    <li id="rating" aria-live="assertive" alt="Name"> Rating: {{item.rating}}</li>
+                    <div id="featureBox">
+                        <img id="resultImg" src="{{item.smallImageUrls[0]}}">
+                        <div id="resultDescription">
+                            <li id="recipeName" aria-live="assertive" alt="Name"> {{item.recipeName}}</li>
+                            <li id="attribute" aria-live="assertive" alt="Name"> Type of Dish: {{item.attribute.course[0]}}</li>
+                            <li id="flavor" aria-live="assertive" alt="Name"> Spicy or Sweet?: {{item.recipeName}}</li>
+                            <li id="rating" aria-live="assertive" alt="Name"> Rating: {{item.rating}}</li>
+                        </div>
+                    </div>
                 </ul>
                 </div>
         </table>
