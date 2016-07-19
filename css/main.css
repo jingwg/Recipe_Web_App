@@ -22,6 +22,7 @@ hr {
     border-top: 0.2em solid sandybrown;
     margin: 0.5em;
     padding: 0;
+    border-color: white;
 }
 #card {
     max-width: 90%;
@@ -58,8 +59,8 @@ div > img {
     padding-top: 1.5em;
     padding-bottom: 3em;
     text-align: center;
-
 }
+
 
 
 
@@ -79,21 +80,21 @@ nav {
     margin-right: 4em;
 }
 
-#main{
+#main, #cardGrouping{
     margin-left: 5em;
     margin-right: 5em;
-    padding: 1em;
+    margin-bottom: 1.5em;
+    padding: 1.5em;
     background-color: rgba(128,128,128, 0.7);
     border: dotted;
     border-color: orange;
     border-radius: 10px;
-
-
 }
 
 #search {
 	margin: 9em;
 }
+
 #searchBar{
 	height: 2em;
 	font-size: 2em;
@@ -124,7 +125,7 @@ nav {
     padding-bottom: 0em;
 }
 
-#feature h3 {
+#feature h3, #categoryHead {
     padding: 0.5em;
     display: inline-block;
     background-color: rgba(220,220,220,0.7);
@@ -142,6 +143,33 @@ nav {
 #cardHead {
     background-color: darkorange;
     text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: dotted;
+
+}
+
+#cardHead a:link, #cardHead a:visited {
+    color: brown;
+}
+
+#cardHead a:hover{
+    color: yellow;
+    text-decoration: none;
+}
+
+
+
+#cardHead, #cardDetails, #cardImage {
+    border-right: dotted;
+    border-left: dotted;
+    border-color: blue;
+}
+
+#cardDetails {
+    border-bottom: dotted;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 form{
