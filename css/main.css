@@ -64,13 +64,33 @@ div > img {
 
 
 /* -------------------------- */
+
+/*background image*/
 body {
-	background-color: #ffe680;
+    background-image: url("../img/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 nav { 
-	margin: 2em;
+	margin: 3em;
+    margin-left: 4em;
+    margin-right: 4em;
 }
+
+#main{
+    margin-left: 5em;
+    margin-right: 5em;
+    padding: 1em;
+    background-color: rgba(128,128,128, 0.7);
+    border: dotted;
+    border-color: orange;
+    border-radius: 10px;
+
+
+}
+
 #search {
 	margin: 9em;
 }
@@ -87,6 +107,10 @@ nav {
 
 #feature h4, #feature img {
 	text-align: center;
+    border: dotted;
+    border-color: blue;
+    border-radius: 10px;
+    margin-top: 0.5em;
 }
 
 #feature img {
@@ -98,6 +122,21 @@ nav {
     min-height:200px;
     margin-bottom: 0em;
     padding-bottom: 0em;
+}
+
+#feature h3 {
+    padding: 0.5em;
+    display: inline-block;
+    background-color: rgba(220,220,220,0.7);
+    border: dotted;
+    border-radius: 10px;
+    border-color: orange;
+    font-style: bold;
+}
+
+#feature h4 {
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 #cardHead {
@@ -128,4 +167,21 @@ form{
 }
 #threeColor:nth-child(6n-2), #threeColor:nth-child(6n-3), #threeColor:nth-child(6n-4) {
     background:  #ff9966;
+}
+
+
+/*Search Result */
+
+#resultImg, #resultDescription{
+    display: inline-block;
+    font-size: 200%;
+}
+
+#resultImg {
+    margin: 2em;
+    height: 200px;
+}
+
+#resultDescription {
+    margin-top: 2em;
 }
