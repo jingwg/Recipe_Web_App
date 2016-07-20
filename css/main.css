@@ -67,11 +67,36 @@ div > img {
     padding-top: 0em;
     width: 100%;
     height:100%;
-    max-width: 100%;
-    min-height:150px;
     margin-bottom: 0em;
     padding-bottom: 0em;
 }
+/*Small Decive*/
+@media (min-width: 768px) and (max-width: 992px){
+     #cardImage{
+        width: 150px;
+        height: 115px;;
+    }
+}
+
+/*Medium Device*/
+@media (min-width: 992px) and (max-width: 1200px){
+      #cardImage{
+        width: 205px;
+        height: 150px;
+    }
+  
+
+}
+/*Large Device*/
+@media (min-width: 1200px){
+    #cardImage{
+        width: 255px;
+        height: 180px;
+    }
+  
+}
+
+
 
 #cardDetails, #feature h4 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
