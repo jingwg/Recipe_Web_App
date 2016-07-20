@@ -346,7 +346,10 @@ img.fittocontainer{
 main#home {
     background-color: white;
     background-size: 100% 100%;
-    background-image: url(https://pixabay.com/static/uploads/photo/2015/09/02/12/41/dish-918613_960_720.jpg);opacity: 0.8;width: 100vw; height: 85vh; max-width: 100%; max-height: 100%;
+    background-image: url('../img/home.jpg');opacity: 0.8;width: 100vw; height: 85vh; max-width: 100%; max-height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 #category a:link, #category a:visited {
     color: brown;
@@ -518,3 +521,25 @@ nav a:hover{
     837072;
     717F41
     }
+
+
+#searchResult {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+#searchResult img {
+    max-width: 300px;
+    max-height: 250px;
+}
+
+#resultHeading {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+#resultInfo {
+    font-size: 150%;
+
+}
+
