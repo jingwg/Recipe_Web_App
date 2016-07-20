@@ -492,3 +492,25 @@ nav a:hover{
     837072;
     717F41
     }
+
+
+#searchResult {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+#searchResult img {
+    max-width: 300px;
+    max-height: 250px;
+}
+
+#resultHeading {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+#resultInfo {
+    font-size: 150%;
+
+}
+
