@@ -343,10 +343,9 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	// create the random meal plan
 	service.random = function(){
 	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
-	$http.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f "
+	$http.get(" "
 	).then(function (response) {
 			var data = response.data;
-
 			data.name = "Random Meal Plan" + service.randomCount;
 			var meals = data.items;
 			for(var i = 0; i < meals.length; i++){

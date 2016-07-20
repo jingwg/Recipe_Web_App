@@ -13,7 +13,13 @@
 
 <button ng-click="addList(listName)" type="button" class="btn btn-success" ng-disabled="newListForm.$invalid">Add</button><br>
 </form>
-<button ng-click="random()" type="button" class="btn btn-success" >Generate a random list</button>
+<!--ng-click="random()"-->
+<button  type="button" class="btn btn-success" id="generateRan">Generate a random list</button>
+<div id= "loading"></div>
+<script> $('#generateRan').click(
+		$('#loading').addClass("spinner");
+)</script>
+
 <!--display all the list in the lists-->
 <div ui-view></div>
 
