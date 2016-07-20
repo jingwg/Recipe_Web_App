@@ -3,9 +3,9 @@
         <div class="row">
             <div id="custom-search-input">
                 <div id="searchBar" class="input-group col-lg-4">
-                    <input type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
+                    <input role="search" type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
                     <span class="input-group-btn">
-                                    <button type="button" ui-sref="search({'searchTerm': searchTerm})" class="btn btn-success">
+                                    <button aria-role="search" type="button" ui-sref="search({'searchTerm': searchTerm})" class="btn btn-success">
                                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
@@ -13,25 +13,8 @@
             </div>
         </div>
     </div>
-    <!--
-    <div id="searchCard">
-        <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
-            <span ui-sref="detail" ng-click="sendDetails(item.id)">
-                    <img id="resultImg" src="{{item.smallImageUrls[0]}}">
-                    <div id="featureBox">
-                        <div id="resultDescription">
-                            <li id="recipeName" aria-live="assertive" alt="Name"> {{item.recipeName}}</li>
-                            <li id="attribute" aria-live="assertive" alt="Name"> Type of Dish: {{item.attribute.course[0]}}</li>
-                            <li id="flavor" aria-live="assertive" alt="Name"> Spicy or Sweet?: {{item.recipeName}}</li>
-                            <li id="rating" aria-live="assertive" alt="Name"> Rating: {{item.rating}}</li>
-                        </div>
-                    </span>
-            <div>
-        </ul>
-        </div>
-        -->
-            <table id="searchResult" class="table table-hover col-lg-11">
-                <thead id="resultHeading">
+            <table role="results table" id="searchResult" class="table table-hover col-lg-11">
+                <thead role="results table head" id="resultHeading">
                     <tr>
                     <td>Image</td>
                     <td>Recipe Name</td>
@@ -39,8 +22,8 @@
                     <td>Rating</td>
                     </tr>
                 </thead>
-                <tbody id="resultInfo">
-                    <tr ng-repeat="item in items">
+                <tbody role="results table body" id="resultInfo">
+                    <tr aria-live="polite" ng-repeat="item in items">
                         <span ui-sref="detail" ng-click="sendDetails(item.id)">
                         <td ui-sref="detail" ng-click="sendDetails(item.id)"><img id="resultImg" src="{{item.smallImageUrls[0].concat('00')}}"></td>
                         <td ui-sref="detail" ng-click="sendDetails(item.id)">{{item.recipeName}}</td>
