@@ -11,9 +11,7 @@ div.headerText {
     color: whitesmoke;
 }
 
-nav {
-    color: ;
-}
+
 
 img.button{
     width: 50px;
@@ -414,6 +412,17 @@ main#home {
 
 #lists h2{
     text-align: center;
+}
+
+nav{
+    background: #837072;
+}
+
+nav a{
+    color: white;
+}
+nav a:hover{
+    color: #E43035;
 }
 /* color scheme */
 {
