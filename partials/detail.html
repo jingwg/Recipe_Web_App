@@ -4,7 +4,7 @@
         <h1>{{detail.name}}</h1>
         <h3>Categories: {{detail.attributes.course[0]}}<span ng-repeat="course in detail.attributes.course" ng-if="$index >=2">, {{course}}</span></h3>
         <div class="row flavor">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <img  class="img-rounded img-fluid center-block fittocontainer" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
               
                 <div id="ingredients">
@@ -35,7 +35,7 @@
                         </ul>
                     </div>
                     </div>
-                    <button type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
+                    <button id="showOnWeb" type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
                     <div id="share"></div>
                      <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
 
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2" class="info">
+            <div class="col-md-3" class="info">
                 
 
                 <br>
@@ -92,10 +92,10 @@
                     <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">-->
                 </div>
 
-                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
-                    <div class="collapse" id="collapseNutrition">
-                        <div class="card card-block"><br>
-                            <div id="nutritionfacts">
+        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
+        <div class="collapse .col-md-offset-3" id="collapseNutrition">
+        <div class="card card-block"><br>
+        <div id="nutritionfacts">
         <table width="242" cellspacing="0" cellpadding="0">
             <tbody><tr>
                 <td align="center" class="header">Nutrition Facts</td>
@@ -243,7 +243,9 @@
                     </div>
 
             </div>
-                <div class="related col-md-6">
+            
+            <!--Related dish only show on web-->
+                <div class="related col-md-6" id="showOnWeb" >
                     <div class="col-md-4">
                         <div ng-repeat="related in relateds" ng-if="$index <=4">
                         <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related"><br>
@@ -257,6 +259,8 @@
                         </div>
                     </div>
                 </div>
+                <!--END OF RELATED-->
+
             </div>
     </div>
     

@@ -10,6 +10,8 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!--Font Family-->
+	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
 
 	<!-- load lodash -->
@@ -49,15 +51,14 @@
 			<nav role= "navigation" class="navbar navbar-static-top">
 			<ul>
 				<div class="nav navbar-nav" ng-controller="signCtrl">
-				<li><a href="#">Bon Appetit   </a></li>
+					<li></li>
+				<li><a id="Bon" href="#">Bon Appetit   </a></li>
 			
 				<li><a href="/#/category">Category</a>   <span class="sr-only">(current)</span></li>
 
-				<li><a ui-sref="lists.list">Meal List</a></li>
-
-			
-				<li class="navbar-right"><a ui-sref ="signIn"  >Sign-In </a></li>
-				<li class="navbar-right"> <a ng-click="signOut()" class="logout" ui-sref= "home">Sign Out</a></li>
+				<li ><a ui-sref="lists.list">Meal List</a></li>			
+				<li id="right"><a ui-sref ="signIn"  >Sign-In </a></li>
+				<li id="right"> <a ng-click="signOut()" class="logout" ui-sref= "home">Sign Out</a></li>
 				</div>
 
 			</ul>
