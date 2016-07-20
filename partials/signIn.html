@@ -23,8 +23,8 @@
 
 	<!-- Submit buttons -->
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary" ng-click="signUp()" ng-disabled="signupForm.$invalid" >Sign-up</button> 
-		<button type="submit" class="btn btn-primary" ng-click="signIn()" ng-disabled="signupForm.email.$invalid || signupForm.password.$invalid" >Sign-in</button>
+		<button type="submit" class="btn btn-primary" ng-click="signUp()" ng-disabled="signupForm.$invalid" ui-sref = "home" >Sign-up</button> 
+		<button type="submit" class="btn btn-primary" ng-click="signIn()" ng-disabled="signupForm.email.$invalid || signupForm.password.$invalid" ui-sref ="lists.list" >Sign-in</button>
 	</div>
 </form>
 </main>
