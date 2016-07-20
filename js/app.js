@@ -90,8 +90,13 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 			// $location.search('q', searchTerm);
 			console.log(searchObject);
 			$scope.items = data.matches;
+			console.log($scope.items);
 		});
-	}
+	};
+	$scope.sendDetails = function(id) {
+		$scope.id = id;
+		console.log($scope.id);
+	};
 }]);
 
 //the signIn controller

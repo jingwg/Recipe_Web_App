@@ -159,6 +159,7 @@ main#home {
     text-decoration: none;
 }
 
+
 .headerText h3, .headerText ul {
     display: inline-block;
 }
@@ -166,4 +167,3 @@ main#home {
 .headerText li {
     display: inline;
 }
-
