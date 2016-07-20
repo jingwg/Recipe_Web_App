@@ -1,15 +1,19 @@
 <main class="container">
 
 
-    <h2>List Detail</h2>
-    <table>
+    <h2>Plan Detail</h2>
+    <table id="detailTable">
     <tr>
-        <th>Recipe Name</th>
-        <th>Recipe Content</th>
+        <th>Day</th>
+        <th>Slot</th>
+        <th>Meal Name</th>
     </tr>
-    <tr ng-repeat="recipe in recipes">
-        <td >{{recipe.name}}</td>
-        <td>{{recipe.ingredients.toString()}}</td>
+    <tr id = "threeColor" ng-repeat="recipe in recipes">
+        <td >{{recipe.day}}</td>
+        <td >{{recipe.slot}}</td>
+        <script></script>
+        <td><a ng-click ="goToRe()"" ng-href="http://allrecipes.com/search/results/?wt={{recipe.name.substring(0,24)}}">{{recipe.name}}</a></td>
     </tr>
+    
  </table>
 </main>

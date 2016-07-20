@@ -1,0 +1,37 @@
+<main id="home" role="main" class="container">
+	<div id="search">
+		<div class="input-group" ng-controller="recipiesSearch">
+		  	<input id="searchBar" type="text" class="form-control" placeholder="Search for..." ng-model="searchTerm">
+		  	<span class="input-group-btn">
+				<button class="btn btn-default" type="button" ui-sref="search({'searchTerm': searchTerm})">Go!</button>
+		  </span>
+		</div><!-- /input-group -->
+	</div>
+	<!--
+	<div id="feature" ng-controller="FeatureCtrl">
+
+	<div id="feature" ng-controller="FeatureCtrl" class="container">
+		<h3>Feature</h3>
+		<div id="featureImg">
+			<div class="row">
+				<div id="featureBox" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<img ng-src="{{topFour[0].smallImageUrls[0].concat('00') }}">
+					<h4>{{topFour[0].recipeName}}</h4>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<img ng-src="{{topFour[1].smallImageUrls[0].concat('00')}}">
+					<h4>{{topFour[1].recipeName}}</h4>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<img ng-src="{{topFour[2].smallImageUrls[0].concat('00')}}">
+					<h4>{{topFour[2].recipeName}}</h4>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<img ng-src="{{topFour[3].smallImageUrls[0].concat('00')}}">
+					<h4>{{topFour[3].recipeName}}</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	-->
+</main>

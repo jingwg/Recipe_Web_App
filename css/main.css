@@ -1,9 +1,56 @@
+header{
+    background-color: saddlebrown;
+    font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
+
+}
+div.headerText {
+    margin-top: 0px;
+    padding: 0.5em;
+    font-size: 2.5em;
+    color: whitesmoke;
+}
+
+#hText {
+    display: inline;
+    font-size: 0.7em;
+}
+
+img.button{
+    width: 50px;
+}
+/*Search result cards creation*/
+
+ul#example4 {
+    background-color: orange;
+    padding: 2em;
+    margin: 2em;
+}
 
 /* for cards for the category view */
-#card {
-    max-width: 75%;
+h2 {
+    font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 3em;
+    padding-bottom: 0.5em;
 }
-#cardHead {
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 0.2em solid sandybrown;
+    margin: 0.5em;
+    padding: 0;
+}
+#card {
+    max-width: 90%;
+    max-height: 100%;
+}
+tr#cardRow {
+    max-height: 100%;
+    height: 75%;
+    position: fixed;
+}
+#cardHead, #feature {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: brown;
     padding-top: 0.7em;
@@ -22,7 +69,7 @@
     padding-bottom: 0em;
 }*/
 
-#cardDetails {
+#cardDetails, #feature h4 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: darkorange;
     margin-top: 0em;
@@ -40,7 +87,7 @@ img.related{
 
 /* -------------------------- */
 body {
-	background-color: #ffe680;
+	/*background-color: #ffe680;*/
 }
 
 nav { 
@@ -65,11 +112,14 @@ nav {
 }
 
 #feature img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 250px;
-	max-height: 200px;
+	margin-top: 0em;
+    padding-top: 0em;
+    width: 100%;
+    height:100%;
+    max-width: 100%;
+    min-height:200px;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
 }
 
 #cardHead {
@@ -160,128 +210,6 @@ img.fittocontainer{
     width: 100%;
 }
 
-/*a.capitalize-first{
-    text-transform: capitalize;
-}*/
-
-
-/*.image {
-  width: 250px;
-  float: left;
-  margin: 20px;
-}
-body {
-  font-size: small;
-  line-height: 1.4;
-}
-p {
-  margin: 0;
-}
-
-.performance-facts {
-  border: 1px solid black;
-  margin: 20px;
-  float: left;
-  width: 280px;
-  padding: 0.5rem;
-  table {
-    border-collapse: collapse;
-  }
-}
-.performance-facts__title {
-  font-weight: bold;
-  font-size: 2rem;
-  margin: 0 0 0.25rem 0;
-}
-.performance-facts__header {
-  border-bottom: 10px solid black;
-  padding: 0 0 0.25rem 0;
-  margin: 0 0 0.5rem 0;
-  p {
-    margin: 0;
-  }
-}
-.performance-facts__table {
-  width: 100%;
-  thead tr {
-    th, td {
-      border: 0;
-    }
-  }
-  th, td {
-    font-weight: normal;
-    text-align: left;
-    padding: 0.25rem 0;
-    border-top: 1px solid black; 
-    white-space: nowrap;
-  }
-  td {
-    &:last-child {
-      text-align: right;
-    }
-  }
-  .blank-cell {
-    width: 1rem;
-    border-top: 0;
-  }
-  .thick-row {
-    th, td {
-      border-top-width: 5px;
-    }
-  }
-}
-.small-info {
-  font-size: 0.7rem;
-}
-
-.performance-facts__table--small {
-  @extend .performance-facts__table;
-  border-bottom: 1px solid #999;
-  margin: 0 0 0.5rem 0;
-  thead {
-    tr {
-      border-bottom: 1px solid black; 
-    }
-  }
-  td {
-    &:last-child {
-      text-align: left;
-    }
-  }
-  th, td {
-    border: 0;
-    padding: 0;
-  }
-}
-
-.performance-facts__table--grid {
-  @extend .performance-facts__table;
-  margin: 0 0 0.5rem 0;
-  td {
-    &:last-child {
-      text-align: left;
-      &::before {
-        content: "•";
-        font-weight: bold;
-        margin: 0 0.25rem 0 0;
-      }
-    }
-  }
-}
-
-.text-center {
-  text-align: center;
-}
-.thick-end {
-  border-bottom: 10px solid black;
-}
-.thin-end {
-  border-bottom: 1px solid black;
-}*/
-
-
-/*style for nutrional label 2*/
-
 #nutritionfacts { 
     background-color:white; 
     border:1px solid black; 
@@ -316,7 +244,7 @@ p {
 }
 #nutritionfacts div.dv { 
     display:inline; 
-    float:right; 
+    float: right;
     font-family:'Arial Black','Helvetica Bold',sans-serif; 
 }
 #nutritionfacts table.vitamins td {  
@@ -334,4 +262,35 @@ p {
 #nutritionfacts .highlighted {
     border:1px dotted grey;
     padding:2px;
+}
+
+#detailTable {
+    width: 100%;
+}
+
+#detailTable th {
+    height: 50px;
+}
+
+#detailTable th, #detailTable td {
+    padding: 15px;
+    text-align: left;
+}
+#threeColor:nth-child(6n-2), #threeColor:nth-child(6n-3), #threeColor:nth-child(6n-4) {
+    background:  #ff9966;
+}
+
+main#home {
+    background-color: white;
+    background-size: 100% 100%;
+    background-image: url(https://pixabay.com/static/uploads/photo/2015/09/02/12/41/dish-918613_960_720.jpg);opacity: 0.8;width: 100vw; height: 85vh; max-width: 100%; max-height: 100%;
+}
+#category a:link, #category a:visited {
+    color: brown;
+    text-decoration: none;
+}
+
+#category a:hover {
+    color: gold;
+    text-decoration: none;
 }
