@@ -211,9 +211,27 @@ form.no-margin{
     padding: 0px;
 }
 
+/* details*/
 img.fittocontainer{
-    width: 100%;
+    width: 40%;
 }
+
+.center-block {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+#detail div.taste_data {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: auto;
+    width: 50%;
+}
+
+#details .btn-success{
+    margin-right: 150px;
+}
+
 
 #nutritionfacts { 
     background-color:white; 
@@ -435,6 +453,9 @@ nav a{
 nav a:hover{
     color: #E43035;
 }
+
+
+
 /* color scheme */
 {
     #E43035;

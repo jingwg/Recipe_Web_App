@@ -1,42 +1,45 @@
-<!--load styles-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.css" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-flat.css" />
-	<link rel="stylesheet" href="../css/main.css">
-    <!-- load our script -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
-<script src="../js/ui-bootstrap-tpls-1.3.3.min.js"></script>
 
-<!--firebase script-->
-<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyAAV_gqWB_7Q1W_6klaHCf5Jdn_gpjg1nE",
-			authDomain: "bon-appetit-1b1a9.firebaseapp.com",
-			databaseURL: "https://bon-appetit-1b1a9.firebaseio.com",
-			storageBucket: "bon-appetit-1b1a9.appspot.com",
-		};
-		firebase.initializeApp(config);
-		</script>
-<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
-
-
-<script src="../js/app.js"></script>
-<script src="../js/script.js"></script>
-<main ng-app="RecipeApp">
+<main ng-app="RecipeApp" class="container" id="detail">
     <div ng-controller="detailsCtrl">
         <h1>{{detail.name}}</h1>
         <h3>Categories: {{detail.attributes.course[0]}}<span ng-repeat="course in detail.attributes.course" ng-if="$index >=2">, {{course}}</span></h3>
-        <div class="row">
+        <div class="row flavor">
             <div class="col-md-4">
-                <img class="img-rounded img-fluid center-block fittocontainer" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
+                <img  class="img-rounded img-fluid center-block fittocontainer" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
+              
+                <div id="ingredients">
+                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">show ingredients</button>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-block">
+                            <div ng-repeat="ingredient in detail.ingredientLines">
+                                <input type="checkbox" name="checkbox" ng-value="ingredient">{{ingredient.substring(1)}}
+                            </div>
+                        </div>
+                        <br><a ng-href="{{detail.source.sourceRecipeUrl}}">Get the recipe</a>
+                    </div>
+                </div>
+                    <div id= "buttons">
+
+                                    <!--drop down select button-->
+                    <div class="btn-group" uib-dropdown is-open="status.isopen" ng-model="lists" id="dropdown-lists">
+                        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                        <span class="glyphicon glyphicon-plus"></span> Add to plan <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a href="" ng-repeat="list in lists" ng-click="addToList(detail.name, list.name)">{{list.name}}</a></li>
+                            <li class="divider"></li>
+                            <li role="menuitem"><a href="" onclick="event.stopPropagation();" ng-click="showDetails = ! showDetails" ng-class="{ 'hidden': showDetails }">Create new list</a>
+                            <form ng-submit="submit(input)" class='no-margin'>
+                            <input type="text" name="newList" class="form-control" value="List Name" onclick="event.stopPropagation();" ng-class="{ 'hidden': ! showDetails }" ng-model="input"></li>
+                            </form>
+                        </ul>
+                    </div>
+                    </div>
+                    <button type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
+                    <div id="share"></div>
+                     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
+
+               
                 <div class="panel panel-primary taste_data">
                     <div class="panel-heading"><h3 class="panel-title">Taste data</h3></div>
                     <div class="panel-body fittocontainer">
@@ -81,36 +84,10 @@
             </div>
             <div class="col-md-2" class="info">
                 
-                <div id="ingredients">
-                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">show ingredients</button>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-block">
-                            <div ng-repeat="ingredient in detail.ingredientLines">
-                                <input type="checkbox" name="checkbox" ng-value="ingredient">{{ingredient.substring(1)}}
-                            </div>
-                        </div>
-                        <br><a ng-href="{{detail.source.sourceRecipeUrl}}">Get the recipe</a>
-                    </div>
-                </div>
+
                 <br>
                 <div>
-                    <!--drop down select button-->
-                    <div class="btn-group" uib-dropdown is-open="status.isopen" ng-model="lists" id="dropdown-lists">
-                        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                        <span class="glyphicon glyphicon-plus"></span> Add to plan <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                            <li role="menuitem"><a href="" ng-repeat="list in lists" ng-click="addToList(detail.name, list.name)">{{list.name}}</a></li>
-                            <li class="divider"></li>
-                            <li role="menuitem"><a href="" onclick="event.stopPropagation();" ng-click="showDetails = ! showDetails" ng-class="{ 'hidden': showDetails }">Create new list</a>
-                            <form ng-submit="submit(input)" class='no-margin'>
-                            <input type="text" name="newList" class="form-control" value="List Name" onclick="event.stopPropagation();" ng-class="{ 'hidden': ! showDetails }" ng-model="input"></li>
-                            </form>
-                        </ul>
-                    </div>
 
-                    <button type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
-                    <div id="share"></div><br>
                     <!--<img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(detail, list.name)">
                     <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">-->
                 </div>
