@@ -162,3 +162,27 @@ main#home {
     color: gold;
     text-decoration: none;
 }
+
+
+/*
+#resultImg {
+    max-width: 15%;
+    max-height: 100%;
+    float: left;
+}
+
+#resultDescription {
+    list-style-type:none;
+}
+#custom-search-input {
+    margin-top: 2em;
+    padding: 1em;
+}
+#searchCard {
+    display: inline;
+}
+#orangeBlock {
+    background-color: orange;
+    width: 75%;
+}
+*/
