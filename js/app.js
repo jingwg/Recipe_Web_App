@@ -15,12 +15,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 			url: '/',
 			templateUrl: 'partials/home.html'
 		})
-		//The abstract parent page
+		//The category page
 		.state('category', {
 			url: '/category',
 			templateUrl: 'partials/category.html'
 		})
-		//The order list page 
+		//The detail page 
 		.state('detail', {
 			url: '/detail/:id',
 			templateUrl: 'partials/detail.html',
@@ -39,6 +39,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 			templateUrl: 'partials/lists.list.html', //path of the partial to load
 			controller: "ListCtrl"
 		})
+		//the list detail page 
 		.state('listDetail', {
 			url: '/lists/:list',
 			templateUrl: 'partials/listDetail.html', //path of the partial to load
@@ -96,7 +97,7 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 	};
 }]);
 
-//the signIn controller
+//Let user sign in to and customize their own meal plan
 myApp.controller('signCtrl', ['$scope',"FirebaseService", function ($scope,FirebaseService) {
 		$scope.newUser = {}; //for sign-in
 		$scope.showSignOut = true;
@@ -126,11 +127,7 @@ myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, 
 	//display the lists
 	$scope.select = function (list) {
 		$scope.searchList = list;
-		//console.log('You selected', movie);
 	}
-
-	//add recipe to the selected list
-
 
 	//close the modal
 	$scope.cancel = function () {

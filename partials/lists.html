@@ -11,12 +11,9 @@
 
 </div>
 </form>
-<button ng-click="addList(listName)" type="button" class="btn btn-success" ng-disabled="newListForm.$invalid">Add</button>
-<button ng-click="random()"" type="button" class="btn btn-success" id="generateRan">Generate a random list</button>
-<div id= "loading"></div>
-<script> $('#generateRan').click(
-		$('#loading').addClass("spinner");
-)</script>
+<button aria-role = "add" ng-click="addList(listName)" type="button" class="btn btn-success" ng-disabled="newListForm.$invalid">Add</button>
+<button aria-role = "generatenewlist"ng-click="random()"" type="button" class="btn btn-success" id="generateRan">Generate a random list</button>
+
 
 <!--display all the list in the lists-->
 <div ui-view></div>
