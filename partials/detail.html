@@ -1,10 +1,10 @@
 
-<main ng-app="RecipeApp" class="container" id="detail">
-    <div ng-controller="detailsCtrl">
+<main class="container" id="detail">
         <h1>{{detail.name}}</h1>
         <h3>Categories: {{detail.attributes.course[0]}}<span ng-repeat="course in detail.attributes.course" ng-if="$index >=2">, {{course}}</span></h3>
         <div class="row flavor">
-            <div class="col-md-3">
+            <div class="col-lg-8">
+            <div class="col-md-3 col-lg-6">
                 <img  class="img-rounded img-fluid center-block fittocontainer" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
               
                 <div id="ingredients">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" class="info">
+            <div class="col-md-3 col-lg-4" class="info">
                 
 
                 <br>
@@ -243,16 +243,17 @@
                     </div>
 
             </div>
+            </div>
             
             <!--Related dish only show on web-->
-                <div class="related col-md-6" id="showOnWeb" >
-                    <div class="col-md-4">
+                <div class="related col-md-4   .col-md-offset-1 .col-lg-4 " id="showOnWeb" class="realted">
+                    <div class="col-md-4 col-lg-4">
                         <div ng-repeat="related in relateds" ng-if="$index <=4">
                         <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related"><br>
                         <a ng-href="#/detail/{{related.id}}">{{related.recipeName}}</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-lg-4">
                         <div ng-repeat="related in relateds" ng-if="$index >4">
                         <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related"><br>
                         <a ng-href="#/detail/{{related.id}}">{{related.recipeName}}</a>
@@ -260,8 +261,7 @@
                     </div>
                 </div>
                 <!--END OF RELATED-->
-
-            </div>
-    </div>
+                </div>
+ 
     
 </main>

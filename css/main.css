@@ -111,7 +111,11 @@ font-size: 16pt;
     padding-left: 15px;
     margin-right: auto;
     margin-left: 100px;
-}
+    }
+    #detail .col-md-4{
+        padding-left: 30px;
+        
+    }
 
   
 
@@ -127,7 +131,27 @@ font-size: 16pt;
     padding-left: 15px;
     margin-right: auto;
     margin-left: 180px;
+    
 }
+#detail{
+    width: 2000px;
+}
+
+    #detail #nutritionfacts {
+        background-color: white;
+        border: 1px solid black;
+        padding: 15px;
+        width: 380px;
+        font-size: 20pt;
+    }
+
+   #detail  #nutritionfacts td {
+    color: black;
+    font-family: 'Arial Black','Helvetica Bold',sans-serif;
+    font-size: 14pt;
+    padding: 0;
+}
+
   
 }
 
