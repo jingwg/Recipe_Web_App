@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="RecipeApp">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Bon Appetit</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
 
 
 
-    <!-- load Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-    <!-- load lodash -->
-    <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
-    <!-- load our script -->
-    <!-- load Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
-   	<!-- Firebase -->
+	<!-- load Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+	<!-- load lodash -->
+	<script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
+	<!-- load our script -->
+	<!-- load Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+	<!-- Firebase -->
 	<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
-		<script>
+	<script>
 		// Initialize Firebase
 		var config = {
 			apiKey: "AIzaSyAAV_gqWB_7Q1W_6klaHCf5Jdn_gpjg1nE",
@@ -36,14 +38,12 @@
 	<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 
 
-		<!-- load our script -->
+	<!-- load our script -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-1.3.3.min.js"></script>
 	<script src="js/app.js"></script>
 
-<<<<<<< HEAD
-=======
 	<link rel="icon" type="image/png" href="https://s3.amazonaws.com/saveoneverything_assets/assets/images/icons/food_dining_icon.png">
 
 </head>
@@ -51,33 +51,25 @@
 <body>
 	<header>
 		<div class="headerText">
-			<!-- <ul>
-				<i id="hText" class="fa fa-cutlery" aria-hidden="true"></i>
-				<li id="hText"> Bon Appetit</li>
-				<div id="headCategory">
-					<li class="align-right" id="hText">SignIn</li>
-					<li class="align-right" id="hText">stuff</li>
-				</div>
-			</ul> -->
 			<h3><a href="#">Bon Appetit</a></h3>
 			<ul>
 
 				<li><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
-				<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+
 				<li><a ui-sref="lists.list">Meal List</a></li>
-				<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+					<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
+							<li><a ui-sref ="signIn"  >Sign-In </a></li>
+						<li><a ng-click="signOut()" class="logout" >Sign Out</a></li>
+				 	</ul>
 			</ul>
 
-			
-		</footer>
 		</div>
-		
-	</nav> -->
+	</header>	
+		<!-- display main view -->
+		<main ui-view></main>
 
-	
-	<main ui-view></main>
-
-	<footer role="contentinfo">
+		<footer role="contentinfo">
+		</footer>
 
 </body>
 
