@@ -83,6 +83,11 @@ font-size: 16pt;
     #detail #showOnWeb{
         display: none;
     }
+        #searchResult img {
+    max-width: 150px;
+    max-height: 880px;
+}
+
      
 }
 
@@ -96,7 +101,10 @@ font-size: 16pt;
     #detail #showOnWeb{
         display: none;
     }
-
+    #searchResult img {
+    max-width: 150px;
+    max-height: 880px;
+}
 
 }
 
@@ -116,6 +124,10 @@ font-size: 16pt;
         padding-left: 30px;
         
     }
+    #searchResult img {
+    max-width: 250px;
+    max-height: 180px;
+}
 
   
 
@@ -150,6 +162,10 @@ font-size: 16pt;
     font-family: 'Arial Black','Helvetica Bold',sans-serif;
     font-size: 14pt;
     padding: 0;
+}
+#searchResult img {
+    max-width: 300px;
+    max-height: 250px;
 }
 
   
@@ -552,14 +568,10 @@ nav a:hover{
     margin-right: 3em;
 }
 
-#searchResult img {
-    max-width: 300px;
-    max-height: 250px;
-}
 
 #resultHeading {
     font-weight: bold;
-    font-size: 200%;
+    font-size: 150%;
 }
 
 #resultInfo {
