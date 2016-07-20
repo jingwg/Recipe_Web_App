@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container" id="lists">
 <form name="newListForm">
 <!--show a input model let user type the name-->
 <h3>Create Your Own Meal Plan</h3>
@@ -10,11 +10,9 @@
 		<input type="text" name="listName" id="listName" class="form-control" ng-model="listName" required>
 
 </div>
-
-<button ng-click="addList(listName)" type="button" class="btn btn-success" ng-disabled="newListForm.$invalid">Add</button><br>
 </form>
-<!--ng-click="random()"-->
-<button  type="button" class="btn btn-success" id="generateRan">Generate a random list</button>
+<button ng-click="addList(listName)" type="button" class="btn btn-success" ng-disabled="newListForm.$invalid">Add</button>
+<button ng-click="random()"" type="button" class="btn btn-success" id="generateRan">Generate a random list</button>
 <div id= "loading"></div>
 <script> $('#generateRan').click(
 		$('#loading').addClass("spinner");

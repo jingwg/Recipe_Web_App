@@ -106,10 +106,12 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 //the signIn controller
 myApp.controller('signCtrl', ['$scope',"FirebaseService", function ($scope,FirebaseService) {
 		$scope.newUser = {}; //for sign-in
+		$scope.showSignOut = true;
 
 		$scope.signUp = function() {
 			var user = {"email":$scope.newUser.email, "password": $scope.newUser.password};
 			FirebaseService.signUp(user);
+
 		};
 		$scope.signIn = function() {
 			var user = {"email":$scope.newUser.email, "password": $scope.newUser.password,"lists": FirebaseService.lists};
@@ -119,7 +121,7 @@ myApp.controller('signCtrl', ['$scope',"FirebaseService", function ($scope,Fireb
 
 		$scope.signOut = function() {
 			FirebaseService.signOut();
-			$scope.showSignOut = true;
+			$scope.showSignOut = false;
 		};
 
 }])
@@ -268,12 +270,14 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 			service.userId = firebaseUser.uid;
 			currentUserRef = usersRef.child(service.userId);
 			currentUserObj = $firebaseObject(currentUserRef);
-			console.log(currentUserObj);
-			service.currentUser = currentUserObj;
-			if(currentUserObj){
 
-			}
-
+			//when the user log in refresh the page the data 
+			currentUserObj.$loaded(function(data){
+				if(data.lists !== undefined){
+				service.lists = data.lists;
+				}
+			})
+			
 			listsRef = currentUserRef.child('lists');
 			listsObj = $firebaseObject(listsRef);
 		}
@@ -300,7 +304,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 				currentUserRef = usersRef.child(firebaseUser.uid);
 				currentUserRef.set(userData); //set the key's value to be the user just  created
 				currentUserObj = $firebaseObject(currentUserRef);
-				service.currentUser = currentUserObj;
+				//service.currentUser = currentUserObj;
 			})
 			.catch(function (error) { //report any errors
 				console.log(error);
@@ -311,9 +315,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	//every time the user sign in should display the data
 	service.signIn = function(user){
 		Auth.$signInWithEmailAndPassword(user.email, user.password);
-		console.log("signIn");
-		service.lists = currentUserObj.lists;
-		console.log(service.lists);
+		service.list = currentUserObj.lists;
 		
 	};
 
@@ -345,7 +347,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	// create the random meal plan
 	service.random = function(){
 	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
-	$http.get(" "
+	$http.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f"
 	).then(function (response) {
 			var data = response.data;
 			data.name = "Random Meal Plan" + service.randomCount;
@@ -385,11 +387,8 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 			var tempList = service.lists[i];
 			if (tempList.name == ListName) {
 				listIndex = i;
-				console.log(service.lists[i].items);
-				console.log("find the array")
 				service.lists[i].items.push(recipe);
-				console.log("check list stored")
-				console.log(service.lists[i]);
+	
 			}
 		}
 	};
@@ -397,8 +396,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	//add a new List into Lists
 	service.addList = function (newlist) {
 		service.lists.push(newlist);
-		console.log("Add new List");
-		console.log(service.lists);
+		console.log(service.lists)
 	};
 
 	//delete the list from the lists
