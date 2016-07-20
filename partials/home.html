@@ -1,8 +1,12 @@
 
 <main id="home" role="main" class="container">
 	<div id="search">
+		<div id="searchHeading">
+		<p id="secondHeading"> A modern technological solution to your cooking needs</p>
+		<p id="thirdHeading"> Bon Appetit! </p>
+		</div>
 		<div class="input-group" ng-controller="recipiesSearch">
-		  	<input id="searchBar" type="text" class="form-control" placeholder="Search for..." ng-model="searchTerm">
+		  	<input id="searchBar" type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
 		  	<span class="input-group-btn">
 				<button class="btn btn-default" type="button" ui-sref="search({'searchTerm': searchTerm})">Go!</button>
 		  </span>
