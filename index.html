@@ -63,9 +63,12 @@
 			<ul>
 
 				<li><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
-				<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+
 				<li><a ui-sref="lists.list">Meal List</a></li>
-				<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+				<div ng-ontroller="signCtrl">
+					<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+					<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+				</div>
 			</ul>
 
 		</div>
