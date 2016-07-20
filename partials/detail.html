@@ -12,7 +12,7 @@
                     <div class="collapse" id="collapseExample">
                         <div class="card card-block">
                             <div ng-repeat="ingredient in detail.ingredientLines">
-                                <input type="checkbox" name="checkbox" ng-value="ingredient">{{ingredient.substring(1)}}
+                                <input type="checkbox" name="checkbox" ng-value="ingredient">{{ingredient}}
                             </div>
                         </div>
                         <br><a ng-href="{{detail.source.sourceRecipeUrl}}">Get the recipe</a>
@@ -37,7 +37,6 @@
                     </div>
                     <button id="showOnWeb" type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
                     <div id="share"></div>
-                     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
 
                
                 <div class="panel panel-primary taste_data">
@@ -87,9 +86,6 @@
 
                 <br>
                 <div>
-
-                    <!--<img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(detail, list.name)">
-                    <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">-->
                 </div>
 
         <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>

@@ -17,7 +17,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 		})
 		//The order list page 
 		.state('detail', {
-			url: '/detail',
+			url: '/detail/:id',
 			templateUrl: 'partials/detail.html',
 			controller: "detailsCtrl"
 		})
@@ -98,7 +98,6 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 		firebase.storeId($scope.id);
 		*/
 		FirebaseService.storeID($scope.id);
-		console.log(FirebaseService.callID());
 		console.log($scope.id);
 	};
 }]);
@@ -197,8 +196,15 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "FirebaseService",
 	}
 }])
 
-myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($scope, $http, FirebaseService){
-	var id = FirebaseService.callID();
+myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', '$stateParams', function($scope, $http, FirebaseService, $stateParams){
+	console.log(FirebaseService.isPreviouslyCalled());
+	console.log($stateParams.id);
+	var id;
+	if(FirebaseService.isPreviouslyCalled() == false){
+		id = FirebaseService.callID();
+	} else{
+		id = $stateParams.id;
+	}
 	console.log(id);
 	var related;
 	$http.get('http://api.yummly.com/v1/api/recipe/' + id + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
@@ -231,8 +237,6 @@ myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($
 		var newList = {"name":newListName, "items":[]};
 		FirebaseService.addList(newList);
 		console.log(FirebaseService.lists);
-		//FirebaseService.storeID("Chicken");
-		//console.log(FirebaseService.callID());
 		$scope.status = {
     		isopen: false
   		};
@@ -254,6 +258,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 
 	//id variable
 	var storedID;
+	var previouslyCalled = false;
 
 
 	service.lists = [];
@@ -414,6 +419,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 
 	service.storeID = function(id){
 		storedID = id;
+		previouslyCalled = false;
 		console.log(id);
 		console.log(storedID);
 		
@@ -421,7 +427,12 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 
 	service.callID = function(){
 		console.log("called", storedID);
+		previouslyCalled = true;
 		return storedID;
+	}
+
+	service.isPreviouslyCalled = function(){
+		return previouslyCalled;
 	}
 
 	return service;

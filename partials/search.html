@@ -41,11 +41,17 @@
                 </thead>
                 <tbody id="resultInfo">
                     <tr ng-repeat="item in items">
-                        <span ui-sref="detail" ng-click="sendDetails(item.id)">
+                        <!--<span ui-sref="detail" ng-click="sendDetails(item.id)">
                         <td ui-sref="detail" ng-click="sendDetails(item.id)"><img id="resultImg" src="{{item.smallImageUrls[0].concat('00')}}"></td>
                         <td ui-sref="detail" ng-click="sendDetails(item.id)">{{item.recipeName}}</td>
                         <td ui-sref="detail" ng-click="sendDetails(item.id)">Type of Dish: {{item.attributes.course[0]}}</td>
                         <td ui-sref="detail" ng-click="sendDetails(item.id)"><s></s>{{item.rating}}</td>
+                        </span>-->
+                        <span ng-href="#/detail/{{item.id}}">
+                        <td ng-href="#/detail/{{item.id}}"><img id="resultImg" src="{{item.smallImageUrls[0].concat('00')}}"></td>
+                        <td ng-href="#/detail/{{item.id}}"><a ng-href="#/detail/{{item.id}}">{{item.recipeName}}</a></td>
+                        <td ng-href="#/detail/{{item.id}}">Type of Dish: {{item.attributes.course[0]}}</td>
+                        <td ng-href="#/detail/{{item.id}}"><s></s>{{item.rating}}</td>
                         </span>
                     </tr>
                 </tbody>
