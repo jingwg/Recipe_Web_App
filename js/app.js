@@ -95,6 +95,9 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 	};
 	$scope.sendDetails = function(id) {
 		$scope.id = id;
+		/*
+		firebase.storeId($scope.id);
+		*/
 		console.log($scope.id);
 	};
 }]);
