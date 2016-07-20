@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Bon Appetit</title>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -50,53 +51,26 @@
 <body>
 	<header>
 		<div class="headerText">
-			<i id="hText" class="fa fa-cutlery" aria-hidden="true"></i>
-			<h4 id="hText"> Bon Appetit<h4>
+			<h3><a href="#">Bon Appetit</a></h3>
+			<ul>
 
-
-
-
+				<li><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
+				<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+				<li><a ui-sref="lists.list">Meal List</a></li>
+				<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+			</ul>
 
 		</div>
-	</header>
-	<!--
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			 Brand and toggle get grouped for better mobile display
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				<a class="navbar-brand" href="#">Bon-Appetit</a>
-			</div>
+	</header>	
+		<!-- display main view -->
+		<main ui-view></main>
 
-
-
-
-
-			Collect the nav links, forms, and other content for toggling
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
-					<li><a ui-sref="lists.list">Meal List</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
-					<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
-					<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a>
-					</li>
-				</ul>
-
-			</div>
-			
+		<footer role="contentinfo">
 		</div>
 		
-	</nav>
+	</nav> -->
 
-	-->
+	
 	<main ui-view></main>
 
 	<footer role="contentinfo">

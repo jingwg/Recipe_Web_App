@@ -1,4 +1,4 @@
-header{
+    header{
     background-color: saddlebrown;
     font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
@@ -11,9 +11,8 @@ div.headerText {
     color: whitesmoke;
 }
 
-#hText {
-    display: inline;
-    font-size: 0.7em;
+nav {
+    color: ;
 }
 
 img.button{
@@ -86,9 +85,6 @@ body {
 	/*background-color: #ffe680;*/
 }
 
-nav { 
-	margin: 2em;
-}
 #search {
 	margin: 9em;
 }
@@ -164,25 +160,10 @@ main#home {
 }
 
 
-/*
-#resultImg {
-    max-width: 15%;
-    max-height: 100%;
-    float: left;
+.headerText h3, .headerText ul {
+    display: inline-block;
 }
 
-#resultDescription {
-    list-style-type:none;
-}
-#custom-search-input {
-    margin-top: 2em;
-    padding: 1em;
-}
-#searchCard {
+.headerText li {
     display: inline;
 }
-#orangeBlock {
-    background-color: orange;
-    width: 75%;
-}
-*/
