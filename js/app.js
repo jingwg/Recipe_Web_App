@@ -214,10 +214,10 @@ myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($
 	$scope.lists = FirebaseService.lists;
 
 	$scope.addToList = function (foodName, selectedListName) {
-		console.log(foodName);
-		console.log(selectedListName);
-		FirebaseService.addRecipe({'name':foodName}, selectedListName);
-		console.log(FirebaseService.lists);
+			var recipe = {"name": foodName};
+			FirebaseService.addRecipe(recipe,selectedListName);
+			console.log("Finish added");
+			console.log(FirebaseService.lists);
 	};
 
 	$scope.showInput = function(){
@@ -226,8 +226,8 @@ myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($
 
 	$scope.submit = function(newListName){
 		console.log(newListName);
-		console.log("haha");
-		FirebaseService.addList({'name':newListName});
+		var newList = {"name":newListName, "items":[]};
+		FirebaseService.addList(newList);
 		console.log(FirebaseService.lists);
 		//FirebaseService.storeID("Chicken");
 		//console.log(FirebaseService.callID());
@@ -380,12 +380,17 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	//recipe = new recipe object
 	//listName = ngModel the name
 	service.addRecipe = function (recipe, ListName) {
+		console.log("in the function");
 		var listIndex = 0;
 		for (var i = 0; i < service.lists.length; i++) {
 			var tempList = service.lists[i];
 			if (tempList.name == ListName) {
 				listIndex = i;
-				service.lists[i].content.push(recipe);
+				console.log(service.lists[i].items);
+				console.log("find the array")
+				service.lists[i].items.push(recipe);
+				console.log("check list stored")
+				console.log(service.lists[i]);
 			}
 		}
 	};
