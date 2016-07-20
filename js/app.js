@@ -117,25 +117,7 @@ myApp.controller('signCtrl', ['$scope',"FirebaseService", function ($scope,Fireb
 
 }])
 
-//The controller I designed for the button to show the modal
-myApp.controller('JingwenDetailCtrl', ['$scope', '$http', '$uibModal', 'FirebaseService', function ($scope, $http, $uibModal, FirebaseService) {
-	$scope.lists = FirebaseService.lists;
-	//show modal
-	$scope.showListModal = function () {
-		var modalInstance = $uibModal.open(
-			{
-				templateUrl: 'partials/select-list-modal.html',
-				controller: 'ModalCtrl',
-				scope: $scope // pass in all the scope variables
-			})
-		modalInstance.result.then(function (selectedItem) {
-			//put item on the scope!
-			$scope.list = selectedItem;
-			console.log("Now selected: ", $scope.list);
-		});
 
-	}//end of show Modal
-}])
 
 //the controller for the modal display all the lists for user to choose
 myApp.controller('ModalCtrl', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
@@ -207,109 +189,6 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "FirebaseService",
 
 }])
 
-//service stored different lists
-/*
-myApp.factory('ListService', ['$http',function ($http) {
-	
-
-	var service = {};
-	service.lists = [];
-	service.randomCount = 1;
-	// create the random meal plan
-	service.random = function(){
-	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
-	$http.get(" "
-	).then(function (response) {
-			var data = response.data;
-
-			data.name = "Random Meal Plan" + service.randomCount;
-			var meals = data.items;
-			for(var i = 0; i < meals.length; i++){
-				//change the meal name
-				var value = JSON.parse(meals[i].value);
-				meals[i].name = value.title;
-				
-				//change the slot
-				var slot = meals[i].slot;
-				if(slot == 1){
-					 meals[i].slot = "breakfast";
-				}else if(slot == 2){
-					meals[i].slot = "lunch";
-				}else if(slot == 3){
-					meals[i].slot = "dinner";
-				}
-				//remove day 
-				if(i%3!=0){
-					meals[i].day = "";
-				}
-				
-				}
-			service.lists.push(data);
-			service.randomCount ++;
-	})
-	}//end of random 
-
-	//the default list
-	var testOb = {name:"kale smothie"}
-	var testList = { name: "favorite", items: [testOb] };
-	service.lists.push(testList);
-
-
-	//add recipe from the detail page to specific list
-	//recipe = new recipe object
-	//listName = ngModel the name
-	service.addRecipe = function (recipe, ListName) {
-		var listIndex = 0;
-		for (var i = 0; i < service.lists.length; i++) {
-			var tempList = service.lists[i];
-			if (tempList.name == ListName) {
-				listIndex = i;
-				service.lists[i].content.push(recipe);
-			}
-		}
-	};
-
-	//add a new List into Lists
-	service.addList = function (newlist) {
-		service.lists.push(newlist);
-		console.log("Add new List");
-		console.log(service.lists);
-	}
-
-	//delete the list from the lists
-	service.deleteList = function (ListName) {
-		var index = 0;
-		for (var i = 0; i < service.lists.length; i++) {
-			var tempList = service.lists[i];
-			//find which list the user want to delete
-			if (tempList.name == ListName) {
-				index = 1;
-			}
-		}
-		service.lists.splice(index, 1);
-
-	};
-
-
-
-	return service;
-
-}]);
-
-/*
-User firebase structure
-[
-	{
-]		"email": "",
-		"password": "",
-		"lists": [
-			[list1],[list2],[list3]
-		]
-
-	}
-]
-
-*/
 
 //all interaction with firebase
 myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebaseArray","$http", function($firebaseAuth, $firebaseObject, $firebaseArray,$http){
@@ -340,6 +219,9 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 			currentUserObj = $firebaseObject(currentUserRef);
 			console.log(currentUserObj);
 			service.currentUser = currentUserObj;
+			if(currentUserObj){
+
+			}
 
 			listsRef = currentUserRef.child('lists');
 			listsObj = $firebaseObject(listsRef);
@@ -373,7 +255,9 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 				console.log(error);
 			});
 
-	};//end of sign up
+	};
+
+	//every time the user sign in should display the data
 	service.signIn = function(user){
 		Auth.$signInWithEmailAndPassword(user.email, user.password);
 		console.log("signIn");
@@ -410,7 +294,7 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	// create the random meal plan
 	service.random = function(){
 	// need to change the link later https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f
-	$http.get(" "
+	$http.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?mashape-key=6BPjQnUGhCmsh3XpfwGoxWIB9Jsnp1uHxXFjsnYyFmnCQ7eA3f "
 	).then(function (response) {
 			var data = response.data;
 
