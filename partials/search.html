@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div id="custom-search-input">
-                <div class="input-group col-lg-4">
+                <div id="searchBar" class="input-group col-lg-4">
                     <input type="text" class="search-query form-control" placeholder="Search" ng-model="searchTerm">
                     <span class="input-group-btn">
                                     <button type="button" ui-sref="search({'searchTerm': searchTerm})" class="btn btn-success">
@@ -13,13 +13,10 @@
             </div>
         </div>
     </div>
-    
-        <table id="orderTable" class="container">
-            <tbody alt="table body">
-                <div id="searchCard" data-role="collapsible" >
-                    
-                <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
-                    <span ui-sref="detail" ng-click="sendDetails(item.id)">
+    <!--
+    <div id="searchCard">
+        <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
+            <span ui-sref="detail" ng-click="sendDetails(item.id)">
                     <img id="resultImg" src="{{item.smallImageUrls[0]}}">
                     <div id="featureBox">
                         <div id="resultDescription">
@@ -29,11 +26,29 @@
                             <li id="rating" aria-live="assertive" alt="Name"> Rating: {{item.rating}}</li>
                         </div>
                     </span>
-                    <div>
-                </ul>
-
-
-                </div>
-        </table>
-    </section>
+            <div>
+        </ul>
+        </div>
+        -->
+            <table class="table table-hover col-lg-11">
+                <thead>
+                    <tr>
+                    <td>Image</td>
+                    <td>Recipe Name</td>
+                    <td>Type of Dish</td>
+                    <td>Rating</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <span ui-sref="detail" ng-click="sendDetails(item.id)">
+                        <td ui-sref="detail" ng-click="sendDetails(item.id)"><img id="resultImg" src="{{item.smallImageUrls[0]}}"></td>
+                        <td ui-sref="detail" ng-click="sendDetails(item.id)">{{item.recipeName}}</td>
+                        <td ui-sref="detail" ng-click="sendDetails(item.id)">Type of Dish: {{item.attributes.course[0]}}</td>
+                        <td ui-sref="detail" ng-click="sendDetails(item.id)">Rating: {{item.rating}}</td>
+                        </span>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 </main>

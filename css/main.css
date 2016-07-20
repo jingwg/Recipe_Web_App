@@ -80,6 +80,10 @@ img.related{
     width: 100%;
 }
 
+div#searchBar {
+    padding: 1em;
+}
+
 
 
 /* -------------------------- */
