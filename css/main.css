@@ -1,3 +1,20 @@
+    header{
+    background-color: saddlebrown;
+    font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
+
+}
+div.headerText {
+    margin-top: 0px;
+    padding: 0.5em;
+    font-size: 2.5em;
+    color: whitesmoke;
+}
+
+nav {
+    color: ;
+}
+
 img.button{
     width: 50px;
 }
@@ -22,7 +39,6 @@ hr {
     border-top: 0.2em solid sandybrown;
     margin: 0.5em;
     padding: 0;
-    border-color: white;
 }
 #card {
     max-width: 90%;
@@ -59,42 +75,19 @@ div > img {
     padding-top: 1.5em;
     padding-bottom: 3em;
     text-align: center;
-}
 
+}
 
 
 
 /* -------------------------- */
-
-/*background image*/
 body {
-    background-image: url("../img/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-nav { 
-	margin: 3em;
-    margin-left: 4em;
-    margin-right: 4em;
-}
-
-#main, #cardGrouping{
-    margin-left: 5em;
-    margin-right: 5em;
-    margin-bottom: 1.5em;
-    padding: 1.5em;
-    background-color: rgba(128,128,128, 0.7);
-    border: dotted;
-    border-color: orange;
-    border-radius: 10px;
+	/*background-color: #ffe680;*/
 }
 
 #search {
 	margin: 9em;
 }
-
 #searchBar{
 	height: 2em;
 	font-size: 2em;
@@ -108,10 +101,6 @@ nav {
 
 #feature h4, #feature img {
 	text-align: center;
-    border: dotted;
-    border-color: blue;
-    border-radius: 10px;
-    margin-top: 0.5em;
 }
 
 #feature img {
@@ -125,51 +114,9 @@ nav {
     padding-bottom: 0em;
 }
 
-#feature h3, #categoryHead {
-    padding: 0.5em;
-    display: inline-block;
-    background-color: rgba(220,220,220,0.7);
-    border: dotted;
-    border-radius: 10px;
-    border-color: orange;
-    font-style: bold;
-}
-
-#feature h4 {
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
-
 #cardHead {
     background-color: darkorange;
     text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-top: dotted;
-
-}
-
-#cardHead a:link, #cardHead a:visited {
-    color: brown;
-}
-
-#cardHead a:hover{
-    color: yellow;
-    text-decoration: none;
-}
-
-
-
-#cardHead, #cardDetails, #cardImage {
-    border-right: dotted;
-    border-left: dotted;
-    border-color: blue;
-}
-
-#cardDetails {
-    border-bottom: dotted;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 form{
@@ -197,19 +144,26 @@ form{
     background:  #ff9966;
 }
 
+main#home {
+    background-color: white;
+    background-size: 100% 100%;
+    background-image: url(https://pixabay.com/static/uploads/photo/2015/09/02/12/41/dish-918613_960_720.jpg);opacity: 0.8;width: 100vw; height: 85vh; max-width: 100%; max-height: 100%;
+}
+#category a:link, #category a:visited {
+    color: brown;
+    text-decoration: none;
+}
 
-/*Search Result */
+#category a:hover {
+    color: gold;
+    text-decoration: none;
+}
 
-#resultImg, #resultDescription{
+.headerText h3, .headerText ul {
     display: inline-block;
-    font-size: 200%;
 }
 
-#resultImg {
-    margin: 2em;
-    height: 200px;
+.headerText li {
+    display: inline;
 }
 
-#resultDescription {
-    margin-top: 2em;
-}
