@@ -19,7 +19,7 @@
                 <div id="searchCard" data-role="collapsible" >
                     
                 <ul id="example4" class="col-lg-11" aria-live="assertive" ng-repeat="item in items">
-                    <span ng-click="sendDetails(item.id)">
+                    <span ui-sref="detail" ng-click="sendDetails(item.id)">
                     <img id="resultImg" src="{{item.smallImageUrls[0]}}">
                     <div id="featureBox">
                         <div id="resultDescription">

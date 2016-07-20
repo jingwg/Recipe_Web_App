@@ -1,4 +1,3 @@
-
 'use strict';
 
 var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'firebase']);
@@ -20,7 +19,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 		.state('detail', {
 			url: '/detail',
 			templateUrl: 'partials/detail.html',
-			controller: "JingwenDetailCtrl"
+			controller: "detailsCtrl"
 		})
 		//The abstract list page
 		.state('lists', {
@@ -68,7 +67,7 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 	});
 }]);
 
-myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', function ($scope, $http, $location, $stateParams) {
+myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', 'FirebaseService', function ($scope, $http, $location, $stateParams, FirebaseService) {
 
 	/*
 		if I have a search term
@@ -98,6 +97,8 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 		/*
 		firebase.storeId($scope.id);
 		*/
+		FirebaseService.storeID($scope.id);
+		console.log(FirebaseService.callID());
 		console.log($scope.id);
 	};
 }]);
@@ -195,7 +196,8 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "FirebaseService",
 }])
 
 myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($scope, $http, FirebaseService){
-	var id = "Greek-Yoghurt-with-Apple-and-Blackberry-Compote-and-Pistachios-1735728";
+	var id = FirebaseService.callID();
+	console.log(id);
 	var related;
 	$http.get('http://api.yummly.com/v1/api/recipe/' + id + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
 		.success(function (data) {
@@ -212,10 +214,10 @@ myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($
 	$scope.lists = FirebaseService.lists;
 
 	$scope.addToList = function (foodName, selectedListName) {
-		console.log(foodName);
-		console.log(selectedListName);
-		FirebaseService.addRecipe({'name':foodName}, selectedListName);
-		console.log(FirebaseService.lists);
+			var recipe = {"name": foodName};
+			FirebaseService.addRecipe(recipe,selectedListName);
+			console.log("Finish added");
+			console.log(FirebaseService.lists);
 	};
 
 	$scope.showInput = function(){
@@ -224,8 +226,8 @@ myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($
 
 	$scope.submit = function(newListName){
 		console.log(newListName);
-		console.log("haha");
-		FirebaseService.addList({'name':newListName});
+		var newList = {"name":newListName, "items":[]};
+		FirebaseService.addList(newList);
 		console.log(FirebaseService.lists);
 		//FirebaseService.storeID("Chicken");
 		//console.log(FirebaseService.callID());
@@ -377,12 +379,17 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 	//recipe = new recipe object
 	//listName = ngModel the name
 	service.addRecipe = function (recipe, ListName) {
+		console.log("in the function");
 		var listIndex = 0;
 		for (var i = 0; i < service.lists.length; i++) {
 			var tempList = service.lists[i];
 			if (tempList.name == ListName) {
 				listIndex = i;
-				service.lists[i].content.push(recipe);
+				console.log(service.lists[i].items);
+				console.log("find the array")
+				service.lists[i].items.push(recipe);
+				console.log("check list stored")
+				console.log(service.lists[i]);
 			}
 		}
 	};
@@ -411,13 +418,14 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 		storedID = id;
 		console.log(id);
 		console.log(storedID);
+		
 	}
 
 	service.callID = function(){
+		console.log("called", storedID);
 		return storedID;
 	}
 
 	return service;
 
 }]);
-
