@@ -42,44 +42,42 @@
     <script src="js/ui-bootstrap-tpls-1.3.3.min.js"></script>
 	<script src="js/app.js"></script>
 
-
+<<<<<<< HEAD
+=======
+	<link rel="icon" type="image/png" href="https://s3.amazonaws.com/saveoneverything_assets/assets/images/icons/food_dining_icon.png">
 
 </head>
-	<body>
-		<nav class="navbar navbar-default">
-		  	<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-				  	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Bon-Appetit</a>
+
+<body>
+	<header>
+		<div class="headerText">
+			<!-- <ul>
+				<i id="hText" class="fa fa-cutlery" aria-hidden="true"></i>
+				<li id="hText"> Bon Appetit</li>
+				<div id="headCategory">
+					<li class="align-right" id="hText">SignIn</li>
+					<li class="align-right" id="hText">stuff</li>
 				</div>
+			</ul> -->
+			<h3><a href="#">Bon Appetit</a></h3>
+			<ul>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				  	<ul class="nav navbar-nav">
-						<li class="active"><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
-						<li><a ui-sref="lists.list">Meal List</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
-							<li><a ui-sref ="signIn"  >Sign-In </a></li>
-						<li><a ng-click="signOut()" class="logout" >Sign Out</a></li>
-				 	</ul>
+				<li><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
+				<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+				<li><a ui-sref="lists.list">Meal List</a></li>
+				<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+			</ul>
 
-				</div><!-- /.navbar-collapse -->
-	  		</div><!-- /.container-fluid -->
-		</nav>
-
-		<!-- display main view -->
-		<main ui-view></main>
-
-		<footer role="contentinfo">
 			
 		</footer>
+		</div>
+		
+	</nav> -->
+
+	
+	<main ui-view></main>
+
+	<footer role="contentinfo">
 
 </body>
 

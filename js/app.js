@@ -64,8 +64,6 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 		var data = response.data.matches;
 		$scope.topFour = _.sampleSize(data, 4);
 		console.log($scope.topFour);
-
-
 	});
 }]);
 
