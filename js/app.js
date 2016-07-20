@@ -19,7 +19,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 		.state('detail', {
 			url: '/detail',
 			templateUrl: 'partials/detail.html',
-			controller: "JingwenDetailCtrl"
+			controller: "detailsCtrl"
 		})
 		//The abstract list page
 		.state('lists', {
@@ -67,7 +67,7 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 	});
 }]);
 
-myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', function ($scope, $http, $location, $stateParams) {
+myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', 'FirebaseService', function ($scope, $http, $location, $stateParams, FirebaseService) {
 
 	/*
 		if I have a search term
@@ -97,6 +97,8 @@ myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParam
 		/*
 		firebase.storeId($scope.id);
 		*/
+		FirebaseService.storeID($scope.id);
+		console.log(FirebaseService.callID());
 		console.log($scope.id);
 	};
 }]);
@@ -194,7 +196,8 @@ myApp.controller('ListDetailCtrl', ["$scope", "$stateParams", "FirebaseService",
 }])
 
 myApp.controller('detailsCtrl', ['$scope', '$http','FirebaseService', function($scope, $http, FirebaseService){
-	var id = FirebaseService.getID();
+	var id = FirebaseService.callID();
+	console.log(id);
 	var related;
 	$http.get('http://api.yummly.com/v1/api/recipe/' + id + '?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822')
 		.success(function (data) {
@@ -411,9 +414,11 @@ myApp.factory('FirebaseService', ["$firebaseAuth", "$firebaseObject", "$firebase
 		storedID = id;
 		console.log(id);
 		console.log(storedID);
+		
 	}
 
 	service.callID = function(){
+		console.log("called", storedID);
 		return storedID;
 	}
 
