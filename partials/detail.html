@@ -1,5 +1,286 @@
-<main class="container">
+<!--load styles-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-flat.css" />
+	<link rel="stylesheet" href="../css/main.css">
+    <!-- load our script -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
+<script src="../js/ui-bootstrap-tpls-1.3.3.min.js"></script>
 
-<button type="button" class="btn btn-warning" ng-click="showListModal()">Add to list</button>
+<!--firebase script-->
+<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAAV_gqWB_7Q1W_6klaHCf5Jdn_gpjg1nE",
+			authDomain: "bon-appetit-1b1a9.firebaseapp.com",
+			databaseURL: "https://bon-appetit-1b1a9.firebaseio.com",
+			storageBucket: "bon-appetit-1b1a9.appspot.com",
+		};
+		firebase.initializeApp(config);
+		</script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 
+
+<script src="../js/app.js"></script>
+<script src="../js/script.js"></script>
+<main ng-app="RecipeApp">
+    <div ng-controller="detailsCtrl">
+        <h1>{{detail.name}}</h1>
+        <h3>Categories: {{detail.attributes.course[0]}}<span ng-repeat="course in detail.attributes.course" ng-if="$index >=2">, {{course}}</span></h3>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-rounded img-fluid center-block fittocontainer" ng-src="{{detail.images[0].hostedLargeUrl}}" alt="image">
+                <div class="panel panel-primary taste_data">
+                    <div class="panel-heading"><h3 class="panel-title">Taste data</h3></div>
+                    <div class="panel-body fittocontainer">
+                        <p>Bitter</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="cyanBar" ng-style="{'width': detail.flavors.Bitter * 100 + '%'}">
+                        {{detail.flavors.Bitter*100 | number:1}}%
+                        </div>
+                   	</div>
+                           <p>Meaty</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="greenBar" ng-style="{'width': detail.flavors.Meaty * 100 + '%'}">
+                        {{detail.flavors.Meaty*100 | number:1}}%
+                        </div>
+                    </div>
+                    <p>Piquant</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="yellowBar" ng-style="{'width': detail.flavors.Piquant * 100 + '%'}">
+                        {{detail.flavors.Piquant*100 | number:1}}%
+                        </div>
+                    </div>
+                    <p>Salty</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="blueBar" ng-style="{'width': detail.flavors.Salty * 100 + '%'}">
+                            {{detail.flavors.Salty*100 | number:1}}%
+                        </div>
+                    </div>
+                    <p>Sour</p>
+                    <div class="progress">
+                        <div class="progress-bar" id="purpleBar" ng-style="{'width': detail.flavors.Sour * 100 + '%'}">
+                            {{detail.flavors.Sour*100 | number:1}}%
+                        </div>
+                    </div>
+                    <span><p>Sweet</p></span>
+                    <div class="progress">
+                        <div class="progress-bar center-text" id="redbar" ng-style="{'width': detail.flavors.Sweet * 100 + '%'}">
+                            {{detail.flavors.Sweet*100| number:1}}%
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" class="info">
+                
+                <div id="ingredients">
+                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">show ingredients</button>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-block">
+                            <div ng-repeat="ingredient in detail.ingredientLines">
+                                <input type="checkbox" name="checkbox" ng-value="ingredient">{{ingredient.substring(1)}}
+                            </div>
+                        </div>
+                        <br><a ng-href="{{detail.source.sourceRecipeUrl}}">Get the recipe</a>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <!--drop down select button-->
+                    <div class="btn-group" uib-dropdown is-open="status.isopen" ng-model="lists" id="dropdown-lists">
+                        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                        <span class="glyphicon glyphicon-plus"></span> Add to plan <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a href="" ng-repeat="list in lists" ng-click="addToList(detail.name, list.name)">{{list.name}}</a></li>
+                            <li class="divider"></li>
+                            <li role="menuitem"><a href="" onclick="event.stopPropagation();" ng-click="showDetails = ! showDetails" ng-class="{ 'hidden': showDetails }">Create new list</a>
+                            <form ng-submit="submit(input)" class='no-margin'>
+                            <input type="text" name="newList" class="form-control" value="List Name" onclick="event.stopPropagation();" ng-class="{ 'hidden': ! showDetails }" ng-model="input"></li>
+                            </form>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-info" onclick="printPage()"><span class="glyphicon glyphicon-print"></span> Print</button>
+                    <div id="share"></div><br>
+                    <!--<img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/128/save-icon.png" alt="save" class="button" ng-click="addToList(detail, list.name)">
+                    <img src="http://www.megaicons.net/static/img/icons_sizes/8/60/256/devices-print-icon.png" alt="print" class="button" onclick="printPage()">-->
+                </div>
+
+                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="false" aria-controls="collapseNutrition"><span class="glyphicon glyphicon-info-sign"></span> Nutritional info</button>
+                    <div class="collapse" id="collapseNutrition">
+                        <div class="card card-block"><br>
+                            <div id="nutritionfacts">
+        <table width="242" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                <td align="center" class="header">Nutrition Facts</td>
+            </tr>
+            <tr>
+                <td><div class="serving">Per <span class="highlighted">180.0g</span> Serving Size</div></td>
+            </tr>
+            <tr style="height: 7px">
+                <td bgcolor="#000000"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 7pt"><div class="line">Amount Per Serving</div></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Calories <div class="weight">230</div></div><div style="padding-top: 1px; float: right;" class="labellight">Calories from Fat <div class="weight">56</div></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><div class="line"><div class="dvlabel">% Daily Value<sup>*</sup></div></div></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Total Fat <div class="weight">6.2g</div></div>
+                    <div class="dv">10%</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="indent">
+                    <div class="line">
+                    <div class="labellight">Saturated Fat <div class="weight">3.5g</div></div>
+                    <div class="dv">17%</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="indent">
+                    <div class="line">
+                    <div class="labellight"><i>Trans</i> Fat <div class="weight">0.0g</div></div>
+                    </div>
+                </td>
+            </tr>
+
+            <!--ng-repeat content start-->
+            <tr ng-repeat="item in detail.nutritionEstimates" ng-if="item.value > 0">
+                <td class="indent">
+                    <div class="line">
+                        <div class="labellight">{{item.description}}</div>
+                        <div class="dv">{{item.value}} {{item.unit.abbreviation}}</div>
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Cholesterol <div class="weight">22mg</div></div>
+                    <div class="dv">7%</div>
+                    </div>
+                </td>
+            </tr>
+                        <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Sodium <div class="weight">618mg</div></div>
+                    <div class="dv">26%</div>
+                    </div>
+                </td>
+            </tr>
+                        <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Total Carbohydrates <div class="weight">32.2g</div></div>
+                    <div class="dv">11%</div>
+                    </div>
+                </td>
+            </tr>
+                        <tr>
+                <td class="indent">
+                    <div class="line">
+                    <div class="labellight">Dietary Fiber <div class="weight">5.2g</div></div>
+                    <div class="dv">21%</div>
+                </div></td>
+            </tr>
+                        <tr>
+                <td class="indent">
+                    <div class="line">
+                    <div class="labellight">Sugars <div class="weight">3.3g</div></div>
+                    </div>
+                </td>
+            </tr>
+                        <tr>
+                <td>
+                    <div class="line">
+                    <div class="label">Protein <div class="weight">11.4g</div>
+                    </div>
+                </div></td>
+            </tr>
+            <tr style="height: 7px">
+                <td bgcolor="#000000"></td>
+            </tr>
+                        <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" border="0" class="vitamins">
+                    <tbody>
+                    <tr>
+                        <td>Vitamin A &nbsp;&nbsp; 10%</td>
+                        <td align="center">•</td>
+                        <td align="right">Calcium &nbsp;&nbsp; 19%</td>
+                    </tr>
+                    <tr>
+                        <td>Vitamin B &nbsp;&nbsp; 22%</td>
+                        <td align="center">•</td>
+                        <td align="right">Iron &nbsp;&nbsp; 13%</td>
+                    </tr>
+                    <tr>
+                        <td>Vitamin C &nbsp;&nbsp; 16%</td>
+                        <td align="center">•</td>
+                        <td align="right">Potassium &nbsp;&nbsp; 7%</td>
+                    </tr>
+                    <tr>
+                        <td>Vitamin D &nbsp;&nbsp; 5%</td>
+                        <td align="center">•</td>
+                        <td align="right">Folate &nbsp;&nbsp; 40%</td>
+                    </tr>                        
+                    </tbody></table>
+                </td>
+            </tr>
+            <tr>
+                <td><div class="line">
+                <div class="labellight">* Based on a regular <a href="#">2000 calorie diet</a>
+                <br><br><i>Nutritional details are an estimate and should only be used as a guide for approximation.</i>
+                </div>
+                </div>
+                </td>
+            </tr>
+            </tbody></table>
+        </div>
+                        </div>
+                    </div>
+
+            </div>
+                <div class="related col-md-6">
+                    <div class="col-md-4">
+                        <div ng-repeat="related in relateds" ng-if="$index <=4">
+                        <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related"><br>
+                        <a ng-href="#/detail/{{related.id}}">{{related.recipeName}}</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div ng-repeat="related in relateds" ng-if="$index >4">
+                        <img class="related img-thumbnail" ng-src="{{related.smallImageUrls[0]}}" alt="related"><br>
+                        <a ng-href="#/detail/{{related.id}}">{{related.recipeName}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
 </main>

@@ -55,9 +55,14 @@
 			<ul>
 
 				<li><a href="/#/category">Category<span class="sr-only">(current)</span></a></li>
-				<li><a ui-sref="signIn" ng-if="!userId">Sign-In</a></li>
+
 				<li><a ui-sref="lists.list">Meal List</a></li>
-				<li><a ng-click="signOut()" class="logout" ng-if="userId">Sign Out</a></li>
+
+					<ul class="nav navbar-nav navbar-right" ng-controller="signCtrl">
+							<li><a ui-sref ="signIn"  >Sign-In </a></li>
+						<li><a ng-click="signOut()" class="logout" >Sign Out</a></li>
+				 	</ul>
+
 			</ul>
 
 		</div>
@@ -66,16 +71,9 @@
 		<main ui-view></main>
 
 		<footer role="contentinfo">
-		</div>
-		
-	</nav> -->
 
-	
-	<main ui-view></main>
+		</footer>
 
-	<footer role="contentinfo">
-
-	</footer>
 </body>
 
 </html>
