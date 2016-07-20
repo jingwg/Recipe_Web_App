@@ -1,3 +1,8 @@
+// Group: Anirudh, Fikri, Jingwen, and Eric
+// Prof: Joel Ross
+// Course: Info 343
+//Date: 7/20/2016
+
 'use strict';
 
 var myApp = angular.module('RecipeApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'firebase']);
@@ -45,7 +50,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, 
 			templateUrl: 'partials/signIn.html',
 			controller: 'signCtrl'
 		})
-		//$urlRouterProvider.otherwise('/');
 		//the search Page
 		.state('search', {
 			url: '/search/:searchTerm',
@@ -67,39 +71,28 @@ myApp.controller('FeatureCtrl', ['$scope', '$http', function ($scope, $http) {
 	});
 }]);
 
+
+// Gets list of recipe items and brings out relevant data from the json file to be displayed on the webpage
+// changes the state of the webpage based on the search input recieved and then redirects via the id when the item is pressed
+// to go to details page. Backbone for the landing page, category page, and searching page.
 myApp.controller('recipiesSearch', ['$scope', '$http', '$location', '$stateParams', 'FirebaseService', function ($scope, $http, $location, $stateParams, FirebaseService) {
-
-	/*
-		if I have a search term
-				get the data
-				show the data
-		
-		> button 
-	*/
-
+	// Changes state of url
+	// and loads out the correct data for the search term in question from the external api.
 	if($stateParams.searchTerm !== '') {
-		console.log('hi');
-		console.log($stateParams);
-		console.log($stateParams.searchTerm);
 		$http.get('http://api.yummly.com/v1/api/recipes?_app_id=727f9e61&_app_key=6432cf347203b199cad6e4ccd21ba822&q=' +
 				  $stateParams.searchTerm).then(function (response) {
+			// Loads the data
 			var data = response.data;
-
+			//changes state parameter
 			var searchObject = $stateParams.searchTerm;
-			// $location.search('q', searchTerm);
-			console.log(searchObject);
+			// Makes data usable in html and allows for two way binding
 			$scope.items = data.matches;
-			console.log($scope.items);
 		});
 	};
+	// Sends out the item that is clicked by tagging its ID
 	$scope.sendDetails = function(id) {
 		$scope.id = id;
-		/*
-		firebase.storeId($scope.id);
-		*/
 		FirebaseService.storeID($scope.id);
-		console.log(FirebaseService.callID());
-		console.log($scope.id);
 	};
 }]);
 
